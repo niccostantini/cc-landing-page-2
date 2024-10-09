@@ -202,24 +202,38 @@ main {
 
 footer {
     display: flex;
-    flex-direction: row;
-    justify-content:center;
-    gap: 5px;
-    align-items: center;
-    color: var(--creamy-white);
-    background-color: var(--imperial-red);
+    flex-direction: column;
     position: sticky;
     bottom: 0;
-    width: 100%;
-    height: 70px;
 
-    a {
-        text-decoration: underline dotted;
-        color: var(--earth-yellow);
-        font-weight: 600;
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
+        gap: 5px;
+        align-items: center;
+        color: var(--creamy-white);
+        background-color: var(--imperial-red);
+        padding: 10px 0 0 0;
+    
+        a {
+            text-decoration: underline dotted;
+            color: var(--earth-yellow);
+            font-weight: 600;
+        }
     }
 
+    div:has(span) {
+        display: flex;
+        flex-direction: column;
     }
+}
+
+
+
+footer div:last-child {
+    padding-bottom: 10px;
+}
 
     .contacts {
         display: flex;
@@ -313,7 +327,8 @@ footer {
     
 }
 
-    header {
+@media screen and (min-width: 1024px) {
+ header {
     display: flex;
     align-items: center;
     justify-content: space-between;;
@@ -582,5 +597,4 @@ footer {
             background-color: #389538;
         }
     }
-
-  
+}
