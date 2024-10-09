@@ -211,7 +211,90 @@ footer {
         font-weight: 600;
     }
 
-}
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+
+        a {
+            text-decoration: none;
+            color: var(--creamy-white);
+        }
+
+        .harmony {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding-bottom: 10px;
+
+            svg {
+                height: 40px;
+                width: 34px;
+                align-self: flex-end;
+                padding-left: 15px;
+            }
+        }
+
+        .card {
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 75px;
+
+            background-color: var(--air-force-blue);
+            color: var(--creamy-white);
+            font-weight: 600;
+
+            border: none;
+            border-radius: 10px;
+            box-shadow: -4px 5px 8px #00000036;
+
+            svg, path {
+                height: 50px;
+                width: 50px;
+                padding: 0 10px 0 10px;
+                fill: var(--creamy-white)
+            }
+
+            .details {
+                width: 400px;
+                font-size: larger;
+                padding-right: 15px;
+            }
+        }
+
+        .card:hover {
+            
+            background-color: rgb(37, 117, 147);
+            transition: all 0.4s ease-out;
+            box-shadow: -6px 7px 5px #0000008f;
+        }
+
+        .ig {
+            background: #833ab4;
+            background: linear-gradient(
+                to right,
+                #833ab4,#fd1d1d,#fcb045
+                );
+                transition: all 0.4s ease-out;
+            }
+
+        .wapp {
+            background-color: var(--verde);
+        }
+
+        .wapp:hover {
+            background-color: #389538;
+        }
+    }
+
+
+    
 }
 
 @media screen 
@@ -395,10 +478,35 @@ footer {
     .contacts {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 18px;
         align-items: center;
 
+        a {
+            text-decoration: none;
+            color: var(--creamy-white);
+        }
+
+        .harmony {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding-bottom: 10px;
+
+            h2 {
+                font-size: 40px;
+            }
+
+            svg {
+                height: 60px;
+                width: 60px;
+                align-self: flex-end;
+                padding-left: 18px;
+            }
+        }
+
         .card {
+            cursor: pointer;
+
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -406,6 +514,7 @@ footer {
 
             background-color: var(--air-force-blue);
             color: var(--creamy-white);
+            font-weight: 600;
 
             border: none;
             border-radius: 10px;
@@ -423,6 +532,30 @@ footer {
                 font-size: larger;
                 padding-right: 15px;
             }
+        }
+
+        .card:hover {
+            
+            background-color: rgb(37, 117, 147);
+            transition: all 0.4s ease-out;
+            box-shadow: -6px 7px 5px #0000008f;
+        }
+
+        .ig {
+            background: #833ab4;
+            background: linear-gradient(
+                to right,
+                #833ab4,#fd1d1d,#fcb045
+                );
+                transition: all 0.4s ease-out;
+            }
+
+        .wapp {
+            background-color: var(--verde);
+        }
+
+        .wapp:hover {
+            background-color: #389538;
         }
     }
 
