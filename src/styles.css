@@ -231,9 +231,8 @@ footer {
             padding-bottom: 10px;
 
             svg {
-                height: 40px;
-                width: 34px;
-                align-self: flex-end;
+                height: 45px;
+                width: 45px;
                 padding-left: 15px;
             }
         }
@@ -249,23 +248,32 @@ footer {
             background-color: var(--air-force-blue);
             color: var(--creamy-white);
             font-weight: 600;
+            font-size: 13px;
 
             border: none;
             border-radius: 10px;
             box-shadow: -4px 5px 8px #00000036;
 
+
+            padding: 0 10px 0 10px;
+
             svg, path {
-                height: 50px;
-                width: 50px;
-                padding: 0 10px 0 10px;
+                height: 30px;
+                width: 30px;
+                padding: 0 15px 0 10px;
                 fill: var(--creamy-white)
             }
 
             .details {
-                width: 400px;
-                font-size: larger;
                 padding-right: 15px;
             }
+
+
+            .details.address p::before {
+                content: "Via di S. Croce \A in Gerusalemme, 55 \a (Roma, RM) c/o Spin Time";
+                white-space: pre-wrap;
+            }
+
         }
 
         .card:hover {
