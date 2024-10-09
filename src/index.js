@@ -46,7 +46,7 @@ const choirChart = new Chart(ctx, {
     data: {
         labels: ['Bassi', 'Tenori', 'Contralti', 'Soprani'],
         datasets: [{
-            label: 'Totale',
+            label: ' ',
             data: [7, 6, 14, 7],
             backgroundColor: [
                 '#e43b3bff', // Bass
