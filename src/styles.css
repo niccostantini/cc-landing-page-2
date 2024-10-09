@@ -232,7 +232,8 @@ footer {
     z-index: 2;
 
         h1 {
-            padding-left: 25px;
+            padding-left: 30px;
+            font-size: 40px;
         }
 
         svg {
@@ -388,6 +389,40 @@ footer {
             text-decoration: underline dotted;
             color: var(--earth-yellow);
             font-weight: 600;
+        }
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+
+        .card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 75px;
+
+            background-color: var(--air-force-blue);
+            color: var(--creamy-white);
+
+            border: none;
+            border-radius: 10px;
+            box-shadow: -4px 5px 8px #00000036;
+
+            svg, path {
+                height: 50px;
+                width: 50px;
+                padding: 0 10px 0 10px;
+                fill: var(--creamy-white)
+            }
+
+            .details {
+                width: 400px;
+                font-size: larger;
+                padding-right: 15px;
+            }
         }
     }
 
