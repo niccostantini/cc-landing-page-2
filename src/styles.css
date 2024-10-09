@@ -313,11 +313,6 @@ footer {
     
 }
 
-@media screen 
-  and (min-device-width: 1200px) 
-  and (max-device-width: 1600px) {
-
-        
     header {
     display: flex;
     align-items: center;
@@ -579,4 +574,4 @@ footer {
         }
     }
 
-  }
+  
