@@ -414,7 +414,7 @@ a:focus {
 .sidenav__subtitle {
     font-size: 1rem;
     color: var(--muted);
-    margin-bottom: var(--space-4xl);
+    margin-bottom: var(--space-xl);
 }
 
 .sidenav__nav {
@@ -923,6 +923,22 @@ a:focus {
 }
 
 /* ==========================================================================
+   Pocast grid
+   ========================================================================== */
+
+#podcast-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    img {
+        height: 400px;
+    }
+}
+
+/* ==========================================================================
    Modal
    ========================================================================== */
 .modal {
@@ -1237,6 +1253,10 @@ a:focus {
     .contact-item__link {
         font-size: 1rem;
         padding: var(--space-sm) var(--space-md);
+    }
+
+    #podcast-grid {
+        flex-direction: column;
     }
 }
 
