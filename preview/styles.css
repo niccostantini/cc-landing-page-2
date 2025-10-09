@@ -120,8 +120,10 @@
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 400 700;
-    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Regular.otf') format('otf')
+    src: url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
+    url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
 }
+
 
 /* ==========================================================================
    Reset & Base styles
