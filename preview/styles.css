@@ -120,8 +120,8 @@
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 400;
-    src: url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
-    url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
+    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
+    url('/assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
 }
 
 /*TT Norms medium*/
@@ -129,8 +129,8 @@
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 600;
-    src: url('assets/fonts/TT-Norms-sv/TTNorms-Medium.woff2') format('woff2'),
-    url('assets/fonts/TT-Norms-sv/TTNorms-Medium.woff') format('woff')
+    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Medium.woff2') format('woff2'),
+    url('/assets/fonts/TT-Norms-sv/TTNorms-Medium.woff') format('woff')
 }
 
 /*TT Norms bold*/
@@ -138,8 +138,8 @@
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 700;
-    src: url('assets/fonts/TT-Norms-sv/TTNorms-Bold.woff2') format('woff2'),
-    url('assets/fonts/TT-Norms-sv/TTNorms-Bold.woff') format('woff')
+    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Bold.woff2') format('woff2'),
+    url('/assets/fonts/TT-Norms-sv/TTNorms-Bold.woff') format('woff')
 }
 
 
