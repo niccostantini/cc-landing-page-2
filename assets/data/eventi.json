@@ -1,0 +1,17 @@
+[
+  {
+    "nome": "Concerto di Primavera",
+    "data": "2025-03-21",
+    "luogo": "Teatro Comunale, Bologna"
+  },
+  {
+    "nome": "Rassegna Corale d'Estate",
+    "data": "2025-06-15",
+    "luogo": "Piazza Duomo, Trento"
+  },
+  {
+    "nome": "Serata Canti di Resistenza",
+    "data": "2025-09-25",
+    "luogo": "Auditorium Parco della Musica, Roma"
+  }
+]

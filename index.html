@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ControCoro - Coro amatoriale di Spin Time</title>
+    <meta name="description" content="Il ControCoro è un coro amatoriale aperto a tutti, nato tra le mura di Spin Time. Spaziamo dal Rinascimento al Gospel, con tappe nella musica popolare.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Mobile Navigation Popup -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-labelledby="mobile-menu-title" aria-hidden="true">
+        <div class="mobile-menu__overlay"></div>
+        <div class="mobile-menu__panel">
+            <div class="mobile-menu__header">
+                <h2 id="mobile-menu-title" class="mobile-menu__title"><acc>C</acc>ontro<acc>C</acc>oro</h2>
+                <button type="button" class="mobile-menu__close" aria-label="Chiudi menu">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <nav class="mobile-menu__nav" aria-label="Navigazione sezioni mobile">
+                <ul class="mobile-menu__list">
+                    <li class="mobile-menu__item">
+                        <a href="#chi-siamo" class="mobile-menu__link" data-section="chi-siamo">
+                            Chi siamo <sup>01</sup>
+                        </a>
+                    </li>
+                    <li class="mobile-menu__item">
+                        <a href="#valori" class="mobile-menu__link" data-section="valori">
+                            I nostri valori <sup>02</sup>
+                        </a>
+                    </li>
+                    <li class="mobile-menu__item">
+                        <a href="#direttivo" class="mobile-menu__link" data-section="direttivo">
+                            Il direttivo <sup>03</sup>
+                        </a>
+                    </li>
+                    <li class="mobile-menu__item">
+                        <a href="#dove-siamo" class="mobile-menu__link" data-section="dove-siamo">
+                            Dove siamo <sup>04</sup>
+                        </a>
+                    </li>
+                    <li class="mobile-menu__item">
+                        <a href="#repertorio" class="mobile-menu__link" data-section="repertorio">
+                            Il repertorio <sup>05</sup>
+                        </a>
+                    </li>
+                    <li class="mobile-menu__item">
+                        <a href="#concerti" class="mobile-menu__link" data-section="concerti">
+                            Concerti <sup>06</sup>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Layout Principale -->
+    <div class="layout">
+        <!-- Desktop Sidebar Navigation -->
+        <aside class="sidenav" id="sidenav" aria-label="Navigazione sezioni desktop">
+            <div class="sidenav__content">
+                <div class="sidenav-header">
+                    <div class="site-header__logo">
+                        <img src="assets/images/logo.svg" alt="ControCoro">
+                        <h1 class="sidenav__title"><acc>C</acc>ontro<br><acc>C</acc>oro</h1>
+                    </div>
+                    <div class="sidenav-header__titles">
+                        <p class="sidenav__subtitle">Coro amatoriale di Spin Time</p>
+                    </div>
+                </div>
+                
+                <nav class="sidenav__nav" aria-label="Indice sezioni">
+                    <ul class="sidenav__list">
+                        <li class="sidenav__item">
+                            <a href="#chi-siamo" class="sidenav__link" data-section="chi-siamo">
+                                Chi siamo <sup>01</sup>
+                            </a>
+                        </li>
+                        <li class="sidenav__item">
+                            <a href="#valori" class="sidenav__link" data-section="valori">
+                                I nostri valori <sup>02</sup>
+                            </a>
+                        </li>
+                        <li class="sidenav__item">
+                            <a href="#direttivo" class="sidenav__link" data-section="direttivo">
+                                Il direttivo <sup>03</sup>
+                            </a>
+                        </li>
+                        <li class="sidenav__item">
+                            <a href="#dove-siamo" class="sidenav__link" data-section="dove-siamo">
+                                Dove siamo <sup>04</sup>
+                            </a>
+                        </li>
+                        <li class="sidenav__item">
+                            <a href="#repertorio" class="sidenav__link" data-section="repertorio">
+                                Il repertorio <sup>05</sup>
+                            </a>
+                        </li>
+                        <li class="sidenav__item">
+                            <a href="#concerti" class="sidenav__link" data-section="concerti">
+                                Concerti <sup>06</sup>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Content Column -->
+        <div class="content-col">
+            <!-- Site Header (sticky within content column) -->
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-header__content">
+                        <div class="site-header__logo">
+                            <img src="assets/images/logo.svg" alt="ControCoro" width="60" height="60">
+                        </div>
+                        <nav class="site-header__nav" aria-label="Navigazione principale">
+                            <button type="button" class="btn btn--filled" id="contatti-btn" aria-haspopup="dialog">Contattaci</button>
+                            <button type="button" class="menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Apri menu di navigazione">
+                                <span class="menu-toggle__icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="menu-toggle__text">Menu</span>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tablet Navigation -->
+            <nav class="navbar-tablet" id="navbar-tablet" aria-label="Navigazione sezioni tablet">
+                <div class="container">
+                    <ul class="navbar-tablet__list">
+                        <li class="navbar-tablet__item">
+                            <a href="#chi-siamo" class="navbar-tablet__link" data-section="chi-siamo">
+                                Chi siamo <sup>01</sup>
+                            </a>
+                        </li>
+                        <li class="navbar-tablet__item">
+                            <a href="#valori" class="navbar-tablet__link" data-section="valori">
+                                I nostri valori <sup>02</sup>
+                            </a>
+                        </li>
+                        <li class="navbar-tablet__item">
+                            <a href="#direttivo" class="navbar-tablet__link" data-section="direttivo">
+                                Il direttivo <sup>03</sup>
+                            </a>
+                        </li>
+                        <li class="navbar-tablet__item">
+                            <a href="#dove-siamo" class="navbar-tablet__link" data-section="dove-siamo">
+                                Dove siamo <sup>04</sup>
+                            </a>
+                        </li>
+                        <li class="navbar-tablet__item">
+                            <a href="#repertorio" class="navbar-tablet__link" data-section="repertorio">
+                                Il repertorio <sup>05</sup>
+                            </a>
+                        </li>
+                        <li class="navbar-tablet__item">
+                            <a href="#concerti" class="navbar-tablet__link" data-section="concerti">
+                                Concerti <sup>06</sup>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="content">
+                <!-- Sezione 01: Chi siamo -->
+                <section id="chi-siamo" class="section" aria-labelledby="chi-siamo-title">
+                    <div class="container">
+                        <h2 id="chi-siamo-title" class="section__title">Chi siamo <sup>01</sup></h2>
+                        
+                        <div class="section__content">
+                            <div class="image-container">
+                                <img src="assets/images/chi-siamo.jpg" alt="ControCoro – chi siamo" class="section-image">
+                            </div>
+                            
+                            <div class="text-content">
+                                <p>Il ControCoro è un coro amatoriale aperto a tutti. Siamo nati tra le mura di <a  class="in-body" href="https://spintime.net">Spin Time</a>,
+                                    un'occupazione abitativa che è anche un vivace polo culturale. Dirige l'etnomusicologo
+                                    Alberto Annarilli (che quando non sta dirigendo noi insegna a Tor Vergata). Spaziamo dal
+                                    Rinascimento al Gospel, con tappe nella musica popolare.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione 02: I nostri valori -->
+                <section id="valori" class="section" aria-labelledby="valori-title">
+                    <div class="container">
+                        <h2 id="valori-title" class="section__title">I nostri valori <sup>02</sup></h2>
+                        
+                        <div class="section__content">
+                            <div class="word-cloud-container">
+                                <div class="word-cloud" id="word-cloud" aria-hidden="true">
+                                    <span class="word-cloud__word" data-word="antifascista" data-size="large">antifascista</span>
+                                    <span class="word-cloud__word" data-word="aperto a tuttə" data-size="medium">aperto a tuttə</span>
+                                    <span class="word-cloud__word" data-word="per musicisti e no" data-size="small">per musicisti e no</span>
+                                    <span class="word-cloud__word" data-word="accogliente" data-size="large">accogliente</span>
+                                    <span class="word-cloud__word" data-word="laico" data-size="medium">laico</span>
+                                    <span class="word-cloud__word" data-word="rispettoso" data-size="small">rispettoso</span>
+                                    <span class="word-cloud__word" data-word="accessibile" data-size="large">accessibile</span>
+                                    <span class="word-cloud__word" data-word="orizzontale" data-size="medium">orizzontale</span>
+                                    <span class="word-cloud__word" data-word="partecipativo" data-size="large">partecipativo</span>
+                                    <span class="word-cloud__word" data-word="antirazzista" data-size="medium">antirazzista</span>
+                                    <span class="word-cloud__word" data-word="antisessista" data-size="small">antisessista</span>
+                                </div>
+                                <!-- Versione statica per screen readers -->
+                                <p class="sr-only">
+                                    I nostri valori: antifascista, aperto a tuttə, per musicisti e no, accogliente, laico, rispettoso, accessibile, orizzontale, partecipativo, antirazzista, antisessista.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione 03: Il direttivo -->
+                <section id="direttivo" class="section" aria-labelledby="direttivo-title">
+                    <div class="container">
+                        <h2 id="direttivo-title" class="section__title">Il direttivo <sup>03</sup></h2>
+                        
+                        <div class="section__content">
+                            <div id="direttivo-grid">
+                                <!-- I membri del direttivo vengono caricati dinamicamente via JavaScript -->
+                            </div>
+                            
+                            <div class="rehearsal-info">
+                                <h3>Prove settimanali</h3>
+                                <p>Ogni <strong>giovedì alle 20:00</strong><br>Spin Time Labs, Roma</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione 04: Dove siamo -->
+                <section id="dove-siamo" class="section" aria-labelledby="dove-siamo-title">
+                    <div class="container">
+                        <h2 id="dove-siamo-title" class="section__title">Dove siamo <sup>04</sup></h2>
+                        
+                        <div class="section__content">
+                            <div class="text-content">
+                                <p><strong><a  class="in-body" href="https://spintime.net">Spin Time</a> oggi è a tutti gli effetti un modello di autorecupero ed un esempio di rigenerazione urbana</strong>, uno spazio polifunzionale la cui governance è condivisa fra gli attori che ne compongono l'ecosistema e le cui porte sono di fatto sempre aperte alla città.</p>
+                                
+                                <p>Una bussola nella discussione sul diritto all'abitare, un punto di riferimento per tutto il quartiere dell'Esquilino. <strong>Offerta sociale e culturale</strong>, servizi accessibili, un luogo che continua a rimettersi in discussione, a darsi nuovi stimoli e obiettivi.</p>
+                                
+                                <p>Tutto questo anche grazie alle tante realtà che hanno supportato e deciso di contribuire al progetto, a partire dalla Fondazione Charlemagne e al programma 'periferiacapitale'.</p>
+                                
+                                <p><strong>Il tasso di dispersione scolastica dentro Spin Time è dello 0%</strong>, a fronte del 10,7% su Roma. Il 67% dei minori partecipano ad attività extrascolastiche. Questi dati non solo hanno un valore assoluto molto positivo, ma se messi in relazione all'estrazione socio-economica delle famiglie e dei minori rappresentano forse il più grande successo del modello Spin Time. L'esistenza di tale scenario positivo è giustificabile da tre principali fattori: la presenza dello stabile in un Municipio centrale, la folta rete di relazione sociali in cui sono inseriti i nuclei familiari e la presenza di un'attiva comunità educante interna.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione 05: Il repertorio -->
+                <section id="repertorio" class="section" aria-labelledby="repertorio-title">
+                    <div class="container">
+                        <h2 id="repertorio-title" class="section__title">Il repertorio <sup>05</sup></h2>
+                        
+                        <div class="section__content">
+                            <div class="carousel-container" id="repertorio-carousel">
+                                <!-- Le cards vengono generate dinamicamente via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione 06: Concerti -->
+                <section id="concerti" class="section" aria-labelledby="concerti-title">
+                    <div class="container">
+                        <h2 id="concerti-title" class="section__title">Concerti <sup>06</sup></h2>
+                        
+                        <div class="section__content">
+                            <div class="events-grid" id="concerti-grid">
+                                <!-- Le cards vengono generate dinamicamente via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Contatti -->
+    <div class="modal" id="contatti-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal__overlay" aria-hidden="true"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 id="modal-title" class="modal__title">Contattaci</h2>
+                <button type="button" class="modal__close" aria-label="Chiudi modal contatti">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="contacts-list">
+                    <div class="contact-item">
+                        <h3 class="contact-item__label">Email</h3>
+                        <a href="mailto:controcoro.spintime@gmail.com" class="contact-item__link">
+                            controcoro.spintime@gmail.com
+                        </a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h3 class="contact-item__label">WhatsApp</h3>
+                        <div class="contact-item__group">
+                            <a href="https://wa.me/393664549453?text=Ciao!%20Posso%20avere%20pi%C3%B9%20info%20sul%20coro%20(orari/prezzo/repertorio)" 
+                               class="contact-item__link" 
+                               target="_blank" 
+                               rel="noopener noreferrer">
+                                3664549453 — Niccolò
+                            </a>
+                            <a href="https://wa.me/393334838472?text=Ciao!%20Posso%20avere%20pi%C3%B9%20info%20sul%20coro%20(orari/prezzo/repertorio)" 
+                               class="contact-item__link" 
+                               target="_blank" 
+                               rel="noopener noreferrer">
+                                3334838472 — Sara
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h3 class="contact-item__label">Instagram</h3>
+                        <a href="https://www.instagram.com/controcoro.spintime/" 
+                           class="contact-item__link" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            @controcoro.spintime
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">
+                &copy; ControCoro &mdash; @ Spin Time Labs, via di S. Croce in Gerusalmme 55, Roma (RM)
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
