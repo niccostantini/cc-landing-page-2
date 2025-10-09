@@ -115,13 +115,31 @@
     font-weight: 900;
     src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
+/*TT Norms regular*/
 @font-face {
     font-family: 'TT Norms';
     font-display: swap;
-    font-weight: 400 700;
+    font-weight: 400;
     src: url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
     url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
+}
+
+/*TT Norms medium*/
+@font-face {
+    font-family: 'TT Norms';
+    font-display: swap;
+    font-weight: 600;
+    src: url('assets/fonts/TT-Norms-sv/TTNorms-Medium.woff2') format('woff2'),
+    url('assets/fonts/TT-Norms-sv/TTNorms-Medium.woff') format('woff')
+}
+
+/*TT Norms bold*/
+@font-face {
+    font-family: 'TT Norms';
+    font-display: swap;
+    font-weight: 700;
+    src: url('assets/fonts/TT-Norms-sv/TTNorms-Bold.woff2') format('woff2'),
+    url('assets/fonts/TT-Norms-sv/TTNorms-Bold.woff') format('woff')
 }
 
 
