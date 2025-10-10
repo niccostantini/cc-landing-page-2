@@ -43,49 +43,28 @@ html, body {
     backface-visibility: hidden;
 }
 
-/* Bottoni di navigazione */
-#prev, #next {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
-    padding: 12px 16px;
-    cursor: pointer;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 4px;
-    backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    z-index: 10;
-}
-
+/* Posizionamento bottoni */
 #prev {
-    left: 12px;
+    left: 16px;
 }
 
 #next {
-    right: 12px;
+    right: 16px;
 }
 
-/* Hover e focus states per bottoni */
+/* Hover e focus states */
 #prev:hover, #next:hover,
 #prev:focus, #next:focus {
-    background: rgba(255, 255, 255, 0.25);
-    outline: 2px solid #fff;
+    background: var(--accent);
+    outline: 2px solid var(--white);
     outline-offset: 2px;
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #prev:active, #next:active {
     transform: translateY(-50%) scale(0.95);
+    background: rgba(231, 158, 58, 1);
 }
 
 /* ==========================================================================
@@ -131,68 +110,100 @@ html, body {
 }
 
 /* ==========================================================================
-   Rettangoli Navigazione (Mobile)
+   Edge Zones - Sottili fasce laterali per navigazione
    ========================================================================== */
-.nav-area {
+.nav-edge {
     position: fixed;
-    top: 0;
-    width: 30%;
-    height: 100vh;
-    z-index: 9998;
-    display: flex !important; /* Force visible for testing */
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Sottile edge zone */
+    height: 200px; /* Altezza limitata, non full screen */
+    z-index: 5;
+    display: none; /* Hidden by default, shown on mobile */
     cursor: pointer;
     user-select: none;
+    pointer-events: auto;
+    /* Semi-transparent for debugging */
+    background: rgba(231, 158, 58, 0.1);
+    border-radius: 0 8px 8px 0;
 }
 
-.nav-area--prev {
+.nav-edge--prev {
     left: 0;
-    background: linear-gradient(to right, rgba(231, 158, 58, 0.15), transparent); /* var(--accent) subtle gradient */
-    /* Debug border */
-    border-left: 2px solid rgba(231, 158, 58, 0.5);
+    border-radius: 0 8px 8px 0;
 }
 
-.nav-area--next {
+.nav-edge--next {
     right: 0;
-    background: linear-gradient(to left, rgba(231, 158, 58, 0.15), transparent); /* var(--accent) subtle gradient */
-    /* Debug border */
-    border-right: 2px solid rgba(231, 158, 58, 0.5);
+    border-radius: 8px 0 0 8px;
 }
 
-.nav-area:active {
-    background-color: rgba(231, 158, 58, 0.2); /* var(--accent) more visible on tap */
+.nav-edge:active {
+    background: rgba(231, 158, 58, 0.3);
 }
 
-.nav-area__icon {
-    font-size: 32px;
+/* ==========================================================================
+   No-Touch Belt - Area libera per controlli video
+   ========================================================================== */
+.no-touch-belt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px; /* Fascia di 80px libera dai controlli */
+    pointer-events: none; /* Trasparente agli eventi */
+    z-index: 1;
+}
+
+/* Edge zones non devono interferire con la belt */
+.nav-edge {
+    bottom: 80px; /* Lascia spazio ai controlli video */
+}
+
+/* ==========================================================================
+   Bottoni Freccia Chirurgici - Hitbox precise
+   ========================================================================== */
+#prev, #next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(231, 158, 58, 0.8);
+    border: none;
+    cursor: pointer;
     color: var(--white);
-    background: rgba(231, 158, 58, 0.7); /* var(--accent) translucent */
-    border-radius: 8px;
-    padding: 12px 16px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
     backdrop-filter: blur(10px);
-    opacity: 0.6; /* Semi-visible for testing */
-    transition: all 0.3s ease;
-    pointer-events: auto; /* Make clickable */
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    /* Hitbox chirurgici */
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
 }
 
-/* Mostra icona al tap */
-.nav-area:active .nav-area__icon {
-    opacity: 1;
-    background: var(--accent); /* Solid accent on tap */
-    transform: translateY(0) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+/* Desktop: hitbox più grandi */
+@media (min-width: 1025px) {
+    #prev, #next {
+        min-width: 56px;
+        min-height: 56px;
+        font-size: 28px;
+    }
 }
 
-/* Auto-fade in per hint */
-.nav-area:hover .nav-area__icon,
-.nav-area.show-hint .nav-area__icon {
-    opacity: 0.8;
-    transform: translateY(0);
-    background: rgba(231, 158, 58, 0.8); /* More opaque accent on hint */
+/* Mobile: hitbox ottimali per touch */
+@media (max-width: 640px) {
+    #prev, #next {
+        min-width: 52px;
+        min-height: 52px;
+        font-size: 24px;
+    }
 }
 
 /* Animazione apparizione elementi mobile */
@@ -244,27 +255,50 @@ html, body {
 /* ==========================================================================
    Responsive Design - Mobile
    ========================================================================== */
+/* ==========================================================================
+   Desktop: Auto-hide frecce
+   ========================================================================== */
+@media (min-width: 1025px) {
+    #prev, #next {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    #carousel:hover #prev,
+    #carousel:hover #next {
+        opacity: 1;
+    }
+    
+    /* No edge zones su desktop */
+    .nav-edge {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   Mobile: Edge zones attive, bottoni visibili
+   ========================================================================== */
 @media (max-width: 640px) {
     .carousel__media {
         max-width: 95vw;
         max-height: 80vh;
     }
     
-    /* Nasconde i bottoni classici su mobile */
-    #prev, #next {
-        display: none !important;
-    }
-    
     /* Mostra il pulsante chiudi su mobile */
     #close {
-        display: flex;
+        display: flex !important;
         top: calc(16px + env(safe-area-inset-top, 0px));
         right: calc(16px + env(safe-area-inset-right, 0px));
     }
     
-    /* Mostra i rettangoli navigazione su mobile */
-    .nav-area {
-        display: flex;
+    /* Mostra edge zones su mobile */
+    .nav-edge {
+        display: block;
+    }
+    
+    /* Frecce sempre visibili su mobile */
+    #prev, #next {
+        opacity: 1;
     }
     
     /* Ottimizza per orientamento portrait */

@@ -925,6 +925,20 @@ function renderGalleria(eventi) {
     const container = document.getElementById('galleria-grid');
     if (!container) return;
     
+    // Filter events: only those with valid directory and name
+    const validEvents = eventi.filter(evento => {
+        return evento && 
+               evento.nome && 
+               evento.directory && 
+               evento.directory.trim() !== '';
+    });
+    
+    // If no valid events, show fallback
+    if (validEvents.length === 0) {
+        showGalleriaFallback();
+        return;
+    }
+    
     // Parse date helper function
     const parseDate = (dateStr) => {
         if (!dateStr || dateStr === '0' || dateStr === 'null' || dateStr === '') {
@@ -934,7 +948,7 @@ function renderGalleria(eventi) {
     };
     
     // Sort events: date descending, events without date at end, then by name ascending
-    eventi.sort((a, b) => {
+    validEvents.sort((a, b) => {
         const dateA = parseDate(a.data);
         const dateB = parseDate(b.data);
         
@@ -954,11 +968,8 @@ function renderGalleria(eventi) {
     // Clear existing content
     container.innerHTML = '';
     
-    eventi.forEach(evento => {
-        // Skip events without required fields
-        if (!evento || !evento.directory || !evento.nome) {
-            return;
-        }
+    validEvents.forEach(evento => {
+        // All events are pre-filtered, so no need for additional checks
         
         const card = document.createElement('button');
         card.type = 'button';

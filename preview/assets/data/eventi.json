@@ -17,8 +17,8 @@
     "nome": "Evento Privato Test",
     "data": "2025-12-15",
     "luogo": "Location Privata",
-    "directory": "./assets/events/privato-2025",
-    "visible": 0
+    "directory": "",
+    "visible": 1
   },
   {
     "nome": "Varie",
