@@ -611,7 +611,14 @@ async function loadEventi() {
         const eventi = await response.json();
         // Filter only visible events for Concerti section
         const eventiVisibili = eventi.filter(evento => isVisible(evento.visible));
-        renderEventi(eventiVisibili);
+        
+        if (eventiVisibili.length === 0) {
+            // No visible events, show fallback
+            showEventiFallback();
+        } else {
+            // Render visible events
+            renderEventi(eventiVisibili);
+        }
     } catch (error) {
         console.error('Error loading eventi:', error);
         showEventiFallback();
