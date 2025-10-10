@@ -454,12 +454,12 @@ a:focus {
 .sidenav__link.active::before {
     content: '';
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 0;
     bottom: 0;
     width: 5.5px;
     background: var(--accent-2);
-    border-radius: 6px 0px 0px 6px;
+    border-radius: 6px 0 0 6px;
 }
 
 /* ==========================================================================
