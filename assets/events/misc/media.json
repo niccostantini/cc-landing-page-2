@@ -1,0 +1,10 @@
+{
+  "title": "Varie",
+  "media": [
+    { "src": "001.jpg", "type": "image" },
+    { "src": "002.jpg", "type": "image" },
+    { "src": "003.jpg", "type": "image" },
+    { "src": "004.jpg", "type": "image" },
+    { "src": "005.mp4", "type": "video" }
+  ]
+}

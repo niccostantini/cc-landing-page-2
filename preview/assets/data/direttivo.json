@@ -1,0 +1,44 @@
+[
+  {
+    "nome": "Alberto",
+    "cognome": "Annarilli",
+    "ruolo": "direttore",
+    "nome-file-immagine": "alberto"
+  },
+  {
+    "nome": "Laura",
+    "cognome": "Tiberi",
+    "ruolo": "contralto, co-fondatrice, tesoriera, rapporti istituzionali",
+    "nome-file-immagine": "laura"
+  },
+  {
+    "nome": "Niccolò",
+    "cognome": "Costantini",
+    "ruolo": "basso, co-fondatore e coordinatore, webmaster",
+    "nome-file-immagine": "niccolo"
+  },
+  {
+    "nome": "Giordano",
+    "cognome": "De Nisi",
+    "ruolo": "co-fondatore, arrangiatore, consulente artistico",
+    "nome-file-immagine": "giordano"
+  },
+  {
+    "nome": "Sara",
+    "cognome": "Cipullo",
+    "ruolo": "contralto, social media strategist",
+    "nome-file-immagine": "sara"
+  },
+  {
+    "nome": "Marco",
+    "cognome": "Pezzolla",
+    "ruolo": "tenore, coordinatore del podcast",
+    "nome-file-immagine": "marco"
+  },
+  {
+    "nome": "Eleonora",
+    "cognome": "Piemontese",
+    "ruolo": "contralto, organizzatrice delle fotocopie",
+    "nome-file-immagine": "eleonora"
+  }
+]

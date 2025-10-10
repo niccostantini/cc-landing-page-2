@@ -1,27 +1,232 @@
 [
   {
-    "Titolo": "Arcadelt - Il bianco e dolce cigno",
+    "Titolo": "A mano a mano",
+    "Autore": "Rino Gaetano",
+    "Tag": [
+      "Cantautorato"
+    ]
+  },
+  {
+    "Titolo": "Ain't gonna let nobody turn me around",
+    "Autore": "Tradizione orale",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Il bianco e dolce cigno",
     "Autore": "Jacques Arcadelt",
-    "Tag": "Classica"
+    "Tag": [
+      "Classica"
+    ]
   },
   {
-    "Titolo": "Des Prez - El grillo",
+    "Titolo": "Beata Progenies",
+    "Autore": "Leonel Power",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "Bella Ciao",
+    "Autore": "Tradizione orale, arr. De Nisi",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Blowin' in the wind",
+    "Autore": "Bob Dylan",
+    "Tag": [
+      "Cantautorato",
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Che sia maleditta l'acqua",
+    "Autore": "Tradizione orale",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "Hallelujah",
+    "Autore": "Leonard Cohen",
+    "Tag": [
+      "Cantautorato",
+      "Pop"
+    ]
+  },
+  {
+    "Titolo": "El Grillo",
     "Autore": "Josquin des Prez",
-    "Tag": "Classica"
-  },
-  {
-    "Titolo": "Te recuerdo Amanda",
-    "Autore": "Víctor Jara",
-    "Tag": "Musica di resistenza"
+    "Tag": [
+      "Classica"
+    ]
   },
   {
     "Titolo": "El Pueblo Unido",
     "Autore": "Sergio Ortega",
-    "Tag": "Musica di resistenza"
+    "Tag": [
+      "Musica di resistenza"
+    ]
   },
   {
-    "Titolo": "Cohen - Hallelujah",
-    "Autore": "Leonard Cohen",
-    "Tag": "Canti popolari"
+    "Titolo": "Freedom",
+    "Autore": "Tradizione orale, arr. E. D. White",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Gli scariolanti",
+    "Autore": "Tradizione orale, arr. Annarilli",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Go down Moses",
+    "Autore": "Tradizione orale",
+    "Tag": [
+      "Musica di resistenza",
+      "Spiritual"
+    ]
+  },
+  {
+    "Titolo": "Guide my feet Lord",
+    "Autore": "Tradizione orale, arr. Harris",
+    "Tag": [
+      "Musica di resistenza",
+      "Spiritual"
+    ]
+  },
+  {
+    "Titolo": "Here's to you Nicola and Bart",
+    "Autore": "Joan Baez",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Il Tragico Affondamento del Sirio",
+    "Autore": "De Gregori, Marini",
+    "Tag": [
+      "Canti popolari"
+    ]
+  },
+  {
+    "Titolo": "Jesu rex admirabilis",
+    "Autore": "Giovanni Pierluigi da Palestrina",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "Keep your eyes on the prize",
+    "Autore": "Tradizione orale, arr. Bible",
+    "Tag": [
+      "Musica di resistenza",
+      "Spiritual"
+    ]
+  },
+  {
+    "Titolo": "Le 3 Bandiere",
+    "Autore": "Tradizione orale",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Lidia spina del mio core",
+    "Autore": "Claudio Monteverdi",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "Lord, I know I've been changed",
+    "Autore": "Kör",
+    "Tag": [
+      "Spiritual"
+    ]
+  },
+  {
+    "Titolo": "Madonna mia pietà",
+    "Autore": "Claudio Monteverdi",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "O Sacrum Convivium",
+    "Autore": "Luigi Molfino",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "Son la mondina",
+    "Autore": "Tradizione orale, arr. Annarilli",
+    "Tag": [
+      "Musica di resistenza",
+      "Canti popolari"
+    ]
+  },
+  {
+    "Titolo": "SUPER TROUPER",
+    "Autore": "ABBA",
+    "Tag": [
+      "Canti popolari"
+    ]
+  },
+  {
+    "Titolo": "Sventola Bandiera Rossa",
+    "Autore": "Tradizione orale",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Te recuerdo Amanda",
+    "Autore": "Víctor Jara",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Tourdion",
+    "Autore": "Pierre Attaignant",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "Viva tutte le Vezzose",
+    "Autore": "Felice Giardini",
+    "Tag": [
+      "Classica"
+    ]
+  },
+  {
+    "Titolo": "We shall not be moved",
+    "Autore": "Tradizione orale",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "We shall overcome",
+    "Autore": "Joan Baez",
+    "Tag": [
+      "Musica di resistenza"
+    ]
+  },
+  {
+    "Titolo": "Where have all the flowers gone",
+    "Autore": "Pete Seeger",
+    "Tag": [
+      "Musica di resistenza"
+    ]
   }
 ]

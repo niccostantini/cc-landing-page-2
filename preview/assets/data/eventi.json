@@ -1,0 +1,44 @@
+[
+  {
+    "nome": "Concerto Biblioteca Lanuvio",
+    "data": "2025-09-25",
+    "luogo": "Biblioteca di Lanuvio",
+    "directory": "./assets/events/lanuvio-2025",
+    "visible": 1
+  },
+  {
+    "nome": "Concerto di Primavera",
+    "data": "2025-03-21",
+    "luogo": "Teatro Comunale, Bologna",
+    "directory": "./assets/events/primavera-2025",
+    "visible": 1
+  },
+  {
+    "nome": "Rassegna Corale d'Estate",
+    "data": "2025-06-15",
+    "luogo": "Piazza Duomo, Trento",
+    "directory": "./assets/events/estate-2025",
+    "visible": 1
+  },
+  {
+    "nome": "Evento Privato Test",
+    "data": "2025-12-15",
+    "luogo": "Location Privata",
+    "directory": "./assets/events/privato-2025",
+    "visible": 0
+  },
+  {
+    "nome": "Concerto Storico 2024",
+    "data": "2024-10-10",
+    "luogo": "Teatro Antico, Roma",
+    "directory": "./assets/events/storico-2024",
+    "visible": 1
+  },
+  {
+    "nome": "Varie",
+    "data": "",
+    "luogo": "",
+    "directory": "./assets/events/misc",
+    "visible": 0
+  }
+]

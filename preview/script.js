@@ -396,7 +396,7 @@ class WordCloudManager {
  */
 async function loadRepertorio() {
     try {
-        const response = await fetch('/assets/data/pezzi.json');
+        const response = await fetch('./assets/data/pezzi.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -432,13 +432,18 @@ function renderRepertorio(pezzi) {
 function createRepertorioCard(pezzo) {
     const card = document.createElement('div');
     card.className = 'repertorio-card';
-    
+
+    const tags = Array.isArray(pezzo.Tag) ? pezzo.Tag : [pezzo.Tag].filter(Boolean);
+    const tagsHtml = tags
+        .map(t => `<span class="repertorio-card__tag">${escapeHtml(t)}</span>`)
+        .join('');
+
     card.innerHTML = `
-        <h3 class="repertorio-card__title">${escapeHtml(pezzo.Titolo)}</h3>
-        <p class="repertorio-card__author">${escapeHtml(pezzo.Autore)}</p>
-        <span class="repertorio-card__tag">${escapeHtml(pezzo.Tag)}</span>
-    `;
-    
+    <h3 class="repertorio-card__title">${escapeHtml(pezzo.Titolo)}</h3>
+    <p class="repertorio-card__author">${escapeHtml(pezzo.Autore)}</p>
+    <div class="repertorio-card__tags">${tagsHtml}</div>
+  `;
+
     return card;
 }
 
@@ -469,7 +474,7 @@ function showRepertorioFallback() {
  */
 async function loadDirettivo() {
     try {
-        const response = await fetch('/assets/data/direttivo.json');
+        const response = await fetch('./assets/data/direttivo.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -502,7 +507,7 @@ function createMembroCard(membro) {
     card.className = 'membro';
     
     const nomeCompleto = `${membro.nome} ${membro.cognome}`;
-    const imagePath = `/assets/images/direttivo/${membro['nome-file-immagine']}.jpg`;
+    const imagePath = `./assets/images/direttivo/${membro['nome-file-immagine']}.jpg`;
     const initials = getInitials(membro.nome, membro.cognome);
     
     // Create avatar wrapper
@@ -582,16 +587,31 @@ function showDirettivoFallback() {
 // ==========================================================================
 
 /**
- * Load and display eventi data
+ * Check if event is visible
+ */
+function isVisible(visibleValue) {
+    if (typeof visibleValue === 'number') {
+        return visibleValue === 1;
+    }
+    if (typeof visibleValue === 'string') {
+        return visibleValue === '1';
+    }
+    return Boolean(visibleValue);
+}
+
+/**
+ * Load and display eventi data (only visible events for Concerti section)
  */
 async function loadEventi() {
     try {
-        const response = await fetch('/assets/data/eventi.json');
+        const response = await fetch('./assets/data/eventi.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const eventi = await response.json();
-        renderEventi(eventi);
+        // Filter only visible events for Concerti section
+        const eventiVisibili = eventi.filter(evento => isVisible(evento.visible));
+        renderEventi(eventiVisibili);
     } catch (error) {
         console.error('Error loading eventi:', error);
         showEventiFallback();
@@ -871,6 +891,101 @@ function initErrorHandling() {
 }
 
 // ==========================================================================
+// Galleria Section
+// ==========================================================================
+
+/**
+ * Load and display all events in galleria section
+ */
+async function loadGalleria() {
+    try {
+        const response = await fetch('./assets/data/eventi.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const eventi = await response.json();
+        renderGalleria(eventi);
+    } catch (error) {
+        console.error('Error loading galleria:', error);
+        showGalleriaFallback();
+    }
+}
+
+/**
+ * Render galleria folders
+ */
+function renderGalleria(eventi) {
+    const container = document.getElementById('galleria-grid');
+    if (!container) return;
+    
+    // Parse date helper function
+    const parseDate = (dateStr) => {
+        if (!dateStr || dateStr === '0' || dateStr === 'null' || dateStr === '') {
+            return null;
+        }
+        return new Date(dateStr);
+    };
+    
+    // Sort events: date descending, events without date at end, then by name ascending
+    eventi.sort((a, b) => {
+        const dateA = parseDate(a.data);
+        const dateB = parseDate(b.data);
+        
+        if (dateA && dateB) {
+            return dateB - dateA; // Date descending
+        }
+        if (dateA && !dateB) {
+            return -1; // Events with date come first
+        }
+        if (!dateA && dateB) {
+            return 1; // Events without date come last
+        }
+        // Both have no date, sort by name ascending
+        return (a.nome || '').localeCompare(b.nome || '');
+    });
+    
+    // Clear existing content
+    container.innerHTML = '';
+    
+    eventi.forEach(evento => {
+        // Skip events without required fields
+        if (!evento || !evento.directory || !evento.nome) {
+            return;
+        }
+        
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'galleria-folder';
+        card.innerHTML = `
+            <div class="galleria-folder__icon" aria-hidden="true">📁</div>
+            <div class="galleria-folder__label">${escapeHtml(evento.nome)}</div>
+        `;
+        
+        card.addEventListener('click', () => {
+            const url = `gallery.html?dir=${encodeURIComponent(evento.directory)}&title=${encodeURIComponent(evento.nome)}`;
+            window.open(url, 'window', 'toolbar=no,menubar=no,resizable=yes');
+        });
+        
+        container.appendChild(card);
+    });
+}
+
+/**
+ * Show fallback content if galleria loading fails
+ */
+function showGalleriaFallback() {
+    const container = document.getElementById('galleria-grid');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="galleria-folder">
+            <div class="galleria-folder__icon" aria-hidden="true">📁</div>
+            <div class="galleria-folder__label">Galleria non disponibile</div>
+        </div>
+    `;
+}
+
+// ==========================================================================
 // Main Initialization
 // ==========================================================================
 
@@ -895,6 +1010,7 @@ function init() {
     loadDirettivo();
     loadRepertorio();
     loadEventi();
+    loadGalleria();
     
     // Performance optimizations
     initLazyLoading();
