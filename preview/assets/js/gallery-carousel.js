@@ -69,6 +69,43 @@
     const container = document.getElementById('carousel');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
+    const closeBtn = document.getElementById('close');
+    
+    // Create mobile navigation areas
+    const navPrev = document.createElement('div');
+    navPrev.className = 'nav-area nav-area--prev';
+    navPrev.innerHTML = '<div class="nav-area__icon">‹</div>';
+    navPrev.setAttribute('aria-label', 'Slide precedente (area touch)');
+    document.body.appendChild(navPrev);
+    
+    const navNext = document.createElement('div');
+    navNext.className = 'nav-area nav-area--next';
+    navNext.innerHTML = '<div class="nav-area__icon">›</div>';
+    navNext.setAttribute('aria-label', 'Slide successiva (area touch)');
+    document.body.appendChild(navNext);
+    
+    // Create indicators
+    const indicators = document.createElement('div');
+    indicators.className = 'carousel__indicators';
+    indicators.setAttribute('role', 'status');
+    indicators.setAttribute('aria-live', 'polite');
+    indicators.innerHTML = `
+        <div class="carousel__counter" aria-label="Contatore slide"></div>
+        <div class="carousel__title" aria-label="Titolo corrente"></div>
+    `;
+    document.body.appendChild(indicators);
+    
+    const counterEl = indicators.querySelector('.carousel__counter');
+    const titleEl = indicators.querySelector('.carousel__title');
+    
+    // Improve button accessibility
+    prevBtn.setAttribute('aria-keyshortcuts', 'ArrowLeft');
+    nextBtn.setAttribute('aria-keyshortcuts', 'ArrowRight');
+    closeBtn.setAttribute('aria-keyshortcuts', 'Escape');
+    
+    // Set initial ARIA labels for carousel
+    container.setAttribute('aria-label', `Galleria ${title}`);
+    container.setAttribute('role', 'img');
     
     // Get initial slide index from hash
     let index = Math.max(0, parseInt((location.hash.match(/slide=(\d+)/) || [])[1] || '0', 10));
@@ -128,6 +165,19 @@
         
         // Update URL hash
         location.hash = `slide=${slideIndex}`;
+        
+        // Update indicators
+        counterEl.textContent = `${slideIndex + 1} / ${items.length}`;
+        titleEl.textContent = title;
+    }
+
+    /**
+     * Haptic feedback for mobile devices
+     */
+    function hapticFeedback() {
+        if (navigator.vibrate && window.innerWidth <= 640) {
+            navigator.vibrate(50); // Light vibration
+        }
     }
 
     /**
@@ -136,6 +186,7 @@
     function next() {
         index = (index + 1) % items.length;
         render(index);
+        hapticFeedback();
     }
 
     /**
@@ -144,11 +195,48 @@
     function prev() {
         index = (index - 1 + items.length) % items.length;
         render(index);
+        hapticFeedback();
     }
 
     // Event listeners for navigation buttons
     nextBtn.addEventListener('click', next);
     prevBtn.addEventListener('click', prev);
+    
+    // Event listeners for mobile navigation
+    closeBtn.addEventListener('click', () => {
+        try {
+            window.close();
+        } catch (error) {
+            // Fallback: go back in history
+            window.history.back();
+        }
+    });
+    
+    navPrev.addEventListener('click', (e) => {
+        e.preventDefault();
+        prev();
+    });
+    
+    navNext.addEventListener('click', (e) => {
+        e.preventDefault();
+        next();
+    });
+    
+    // Show navigation hints briefly on load (mobile only)
+    function showNavigationHints() {
+        if (window.innerWidth <= 640) {
+            navPrev.classList.add('show-hint');
+            navNext.classList.add('show-hint');
+            
+            setTimeout(() => {
+                navPrev.classList.remove('show-hint');
+                navNext.classList.remove('show-hint');
+            }, 2000);
+        }
+    }
+    
+    // Show hints after initial render
+    setTimeout(showNavigationHints, 1000);
 
     // Keyboard navigation
     window.addEventListener('keydown', (e) => {
@@ -172,11 +260,17 @@
     let startX = 0;
     let startY = 0;
     let isVerticalScroll = false;
+    let isSwipeInProgress = false;
+    let swipeThreshold = 50; // Adaptive threshold
 
     container.addEventListener('pointerdown', (e) => {
         startX = e.clientX;
         startY = e.clientY;
         isVerticalScroll = false;
+        isSwipeInProgress = true;
+        
+        // Visual feedback
+        container.style.cursor = 'grabbing';
     });
 
     container.addEventListener('pointermove', (e) => {
@@ -193,15 +287,18 @@
 
     container.addEventListener('pointerup', (e) => {
         if (!startX || isVerticalScroll) {
-            startX = 0;
-            startY = 0;
+            resetSwipeState();
             return;
         }
 
         const deltaX = e.clientX - startX;
         
-        // Swipe threshold
-        if (Math.abs(deltaX) > 40) {
+        // Adaptive threshold based on screen size
+        const screenWidth = window.innerWidth;
+        swipeThreshold = screenWidth < 640 ? 30 : 40;
+        
+        // Swipe detection
+        if (Math.abs(deltaX) > swipeThreshold) {
             if (deltaX < 0) {
                 next(); // Swipe left -> next
             } else {
@@ -209,9 +306,15 @@
             }
         }
         
+        resetSwipeState();
+    });
+    
+    function resetSwipeState() {
         startX = 0;
         startY = 0;
-    });
+        isSwipeInProgress = false;
+        container.style.cursor = 'grab';
+    }
 
     // Handle touch events to prevent default scroll behavior during horizontal swipes
     container.addEventListener('touchstart', (e) => {
@@ -237,14 +340,14 @@
 
     container.addEventListener('touchend', (e) => {
         if (!startX || isVerticalScroll) {
-            startX = 0;
-            startY = 0;
+            resetSwipeState();
             return;
         }
 
         const deltaX = e.changedTouches[0].clientX - startX;
         
-        if (Math.abs(deltaX) > 40) {
+        // Use same adaptive threshold
+        if (Math.abs(deltaX) > swipeThreshold) {
             if (deltaX < 0) {
                 next();
             } else {
@@ -252,8 +355,7 @@
             }
         }
         
-        startX = 0;
-        startY = 0;
+        resetSwipeState();
     }, { passive: true });
 
     // Initial render

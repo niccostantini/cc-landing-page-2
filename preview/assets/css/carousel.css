@@ -1,6 +1,14 @@
 /* ==========================================================================
-   Carosello Galleria - CSS Minimale
+   Carosello Galleria - CSS con Design Tokens
    ========================================================================== */
+
+/* Import design tokens from main styles */
+:root {
+    --accent: #e79e3a;
+    --accent-2: #c33323;
+    --ink: #000000;
+    --white: #ffffff;
+}
 
 /* Reset e base */
 html, body {
@@ -30,6 +38,9 @@ html, body {
     object-fit: contain;
     border-radius: 4px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    /* Performance optimizations */
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 /* Bottoni di navigazione */
@@ -77,26 +88,203 @@ html, body {
     transform: translateY(-50%) scale(0.95);
 }
 
-/* Responsive per schermi piccoli */
-@media (max-width: 768px) {
+/* ==========================================================================
+   Pulsante Chiudi (Mobile)
+   ========================================================================== */
+#close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: rgba(195, 51, 35, 0.9); /* var(--accent-2) with transparency */
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 24px;
+    font-weight: normal;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex !important; /* Force visible for testing */
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    z-index: 9999;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    /* Debug border */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#close:hover, #close:focus {
+    background: var(--accent-2); /* Solid accent-2 on hover */
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+#close:active {
+    transform: scale(0.95);
+}
+
+/* ==========================================================================
+   Rettangoli Navigazione (Mobile)
+   ========================================================================== */
+.nav-area {
+    position: fixed;
+    top: 0;
+    width: 30%;
+    height: 100vh;
+    z-index: 9998;
+    display: flex !important; /* Force visible for testing */
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-area--prev {
+    left: 0;
+    background: linear-gradient(to right, rgba(231, 158, 58, 0.15), transparent); /* var(--accent) subtle gradient */
+    /* Debug border */
+    border-left: 2px solid rgba(231, 158, 58, 0.5);
+}
+
+.nav-area--next {
+    right: 0;
+    background: linear-gradient(to left, rgba(231, 158, 58, 0.15), transparent); /* var(--accent) subtle gradient */
+    /* Debug border */
+    border-right: 2px solid rgba(231, 158, 58, 0.5);
+}
+
+.nav-area:active {
+    background-color: rgba(231, 158, 58, 0.2); /* var(--accent) more visible on tap */
+}
+
+.nav-area__icon {
+    font-size: 32px;
+    color: var(--white);
+    background: rgba(231, 158, 58, 0.7); /* var(--accent) translucent */
+    border-radius: 8px;
+    padding: 12px 16px;
+    backdrop-filter: blur(10px);
+    opacity: 0.6; /* Semi-visible for testing */
+    transition: all 0.3s ease;
+    pointer-events: auto; /* Make clickable */
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mostra icona al tap */
+.nav-area:active .nav-area__icon {
+    opacity: 1;
+    background: var(--accent); /* Solid accent on tap */
+    transform: translateY(0) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Auto-fade in per hint */
+.nav-area:hover .nav-area__icon,
+.nav-area.show-hint .nav-area__icon {
+    opacity: 0.8;
+    transform: translateY(0);
+    background: rgba(231, 158, 58, 0.8); /* More opaque accent on hint */
+}
+
+/* Animazione apparizione elementi mobile */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#close {
+    animation: fadeInUp 0.3s ease 0.2s both;
+}
+
+.nav-area {
+    animation: fadeInUp 0.3s ease 0.1s both;
+}
+
+/* ==========================================================================
+   Responsive Design - Tablet
+   ========================================================================== */
+@media (max-width: 1024px) and (min-width: 641px) {
     .carousel__media {
-        max-width: 95vw;
-        max-height: 85vh;
+        max-width: 90vw;
+        max-height: 82vh;
     }
     
     #prev, #next {
-        padding: 8px 12px;
-        font-size: 20px;
-        min-width: 40px;
-        min-height: 40px;
+        padding: 10px 14px;
+        font-size: 22px;
+        min-width: 48px;
+        min-height: 48px;
+        z-index: 1000;
     }
     
     #prev {
-        left: 8px;
+        left: 16px;
     }
     
     #next {
-        right: 8px;
+        right: 16px;
+    }
+}
+
+/* ==========================================================================
+   Responsive Design - Mobile
+   ========================================================================== */
+@media (max-width: 640px) {
+    .carousel__media {
+        max-width: 95vw;
+        max-height: 80vh;
+    }
+    
+    /* Nasconde i bottoni classici su mobile */
+    #prev, #next {
+        display: none !important;
+    }
+    
+    /* Mostra il pulsante chiudi su mobile */
+    #close {
+        display: flex;
+        top: calc(16px + env(safe-area-inset-top, 0px));
+        right: calc(16px + env(safe-area-inset-right, 0px));
+    }
+    
+    /* Mostra i rettangoli navigazione su mobile */
+    .nav-area {
+        display: flex;
+    }
+    
+    /* Ottimizza per orientamento portrait */
+    @media (orientation: portrait) {
+        .carousel__media {
+            max-width: 98vw;
+            max-height: 75vh;
+        }
+        
+        #prev, #next {
+            top: 45%;
+        }
+    }
+    
+    /* Ottimizza per orientamento landscape */
+    @media (orientation: landscape) {
+        .carousel__media {
+            max-width: 92vw;
+            max-height: 85vh;
+        }
     }
 }
 
@@ -114,4 +302,122 @@ html, body {
 
 #carousel:active {
     cursor: grabbing;
+}
+
+/* ==========================================================================
+   Indicatori di Stato
+   ========================================================================== */
+.carousel__indicators {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    color: white;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.carousel__counter {
+    font-variant-numeric: tabular-nums;
+    min-width: 45px;
+    text-align: center;
+}
+
+.carousel__title {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   Feedback Visivi per Touch
+   ========================================================================== */
+.carousel__media {
+    transition: transform 0.1s ease;
+}
+
+.carousel__media:active {
+    transform: scale(0.98);
+}
+
+/* Ripple effect per bottoni */
+#prev, #next {
+    position: relative;
+    overflow: hidden;
+}
+
+#prev::after, #next::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+#prev:active::after, #next:active::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   Responsive - Indicatori
+   ========================================================================== */
+@media (max-width: 640px) {
+    .carousel__indicators {
+        bottom: 16px;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    .carousel__title {
+        max-width: 150px;
+    }
+    
+    .carousel__counter {
+        min-width: 40px;
+    }
+    
+    /* Safe area per dispositivi con notch */
+    .carousel__indicators {
+        bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+    
+    #close {
+        top: calc(16px + env(safe-area-inset-top));
+        right: calc(16px + env(safe-area-inset-right));
+    }
+}
+
+/* ==========================================================================
+   Miglioramenti per dispositivi con notch
+   ========================================================================== */
+@supports (padding: max(0px)) {
+    .carousel__indicators {
+        bottom: max(24px, 24px + env(safe-area-inset-bottom));
+    }
+    
+    @media (max-width: 640px) {
+        .carousel__indicators {
+            bottom: max(16px, 16px + env(safe-area-inset-bottom));
+        }
+        
+        #close {
+            top: max(16px, 16px + env(safe-area-inset-top));
+            right: max(16px, 16px + env(safe-area-inset-right));
+        }
+    }
 }
