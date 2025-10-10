@@ -49,7 +49,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 100;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-200 - latin */
 @font-face {
@@ -57,7 +57,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 200;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-300 - latin */
 @font-face {
@@ -65,7 +65,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 300;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-regular - latin */
 @font-face {
@@ -73,7 +73,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 400;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-500 - latin */
 @font-face {
@@ -81,7 +81,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 500;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-600 - latin */
 @font-face {
@@ -89,7 +89,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 600;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-700 - latin */
 @font-face {
@@ -97,7 +97,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 700;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-800 - latin */
 @font-face {
@@ -105,7 +105,7 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 800;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* league-spartan-900 - latin */
 @font-face {
@@ -113,15 +113,15 @@
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 900;
-    src: url('/assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /*TT Norms regular*/
 @font-face {
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 400;
-    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
-    url('/assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
+    src: url('./assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
+    url('./assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
 }
 
 /*TT Norms medium*/
@@ -129,8 +129,8 @@
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 600;
-    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Medium.woff2') format('woff2'),
-    url('/assets/fonts/TT-Norms-sv/TTNorms-Medium.woff') format('woff')
+    src: url('./assets/fonts/TT-Norms-sv/TTNorms-Medium.woff2') format('woff2'),
+    url('./assets/fonts/TT-Norms-sv/TTNorms-Medium.woff') format('woff')
 }
 
 /*TT Norms bold*/
@@ -138,8 +138,8 @@
     font-family: 'TT Norms';
     font-display: swap;
     font-weight: 700;
-    src: url('/assets/fonts/TT-Norms-sv/TTNorms-Bold.woff2') format('woff2'),
-    url('/assets/fonts/TT-Norms-sv/TTNorms-Bold.woff') format('woff')
+    src: url('./assets/fonts/TT-Norms-sv/TTNorms-Bold.woff2') format('woff2'),
+    url('./assets/fonts/TT-Norms-sv/TTNorms-Bold.woff') format('woff')
 }
 
 
@@ -425,7 +425,7 @@ a:focus {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
 }
 
 .sidenav__link {
@@ -434,7 +434,7 @@ a:focus {
     font-weight: 600;
     text-decoration: none;
     display: block;
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-sm);
     transition: all 0.2s ease;
     position: relative;
@@ -877,6 +877,7 @@ a:focus {
     font-size: 0.875rem;
     font-weight: 500;
     border-radius: var(--radius-full);
+    margin: 0 1px;
 }
 
 /* ==========================================================================
@@ -1074,9 +1075,13 @@ a:focus {
    Footer
    ========================================================================== */
 .footer {
-    padding: var(--space-4xl) 0 var(--space-xl) 0;
+
+    padding: var(--space-sm) var(--space-sm);
     border-top: 1px solid var(--border);
-    margin-top: var(--space-4xl);
+    position: sticky;
+    bottom: 0;
+    background-color: var(--white);
+    font-size: smaller;
 }
 
 .footer__text {
@@ -1169,9 +1174,104 @@ a:focus {
     
     /* Typography */
     body {
-        font-size: 16px;
+        font-size: 12px;
+    }
+}
+
+/* ==========================================================================
+   Galleria Section (Desktop Folders)
+   ========================================================================== */
+
+/* Griglia cartelle galleria */
+#galleria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+}
+
+/* Cartelle stile desktop */
+.galleria-folder {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.galleria-folder:hover,
+.galleria-folder:focus {
+    background: var(--border);
+    transform: translateY(-2px);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.galleria-folder:active {
+    transform: translateY(0);
+}
+
+/* Icona cartella */
+.galleria-folder__icon {
+    font-size: 48px;
+    line-height: 1;
+    display: block;
+}
+
+/* Etichetta nome cartella */
+.galleria-folder__label {
+    margin-top: var(--space-sm);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 100%;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Responsive per galleria */
+@media (max-width: 768px) {
+    #galleria-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: var(--space-md);
     }
     
+    .galleria-folder__icon {
+        font-size: 40px;
+    }
+    
+    .galleria-folder__label {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    #galleria-grid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: var(--space-sm);
+    }
+    
+    .galleria-folder {
+        padding: var(--space-sm);
+        min-height: 80px;
+    }
+    
+    .galleria-folder__icon {
+        font-size: 36px;
+    }
+    
+    .galleria-folder__label {
+        font-size: 12px;
+    }
+}
     h1 {
         font-size: 2.5rem;
     }
@@ -1258,7 +1358,7 @@ a:focus {
     #podcast-grid {
         flex-direction: column;
     }
-}
+
 
 /* Desktop: ≥1025px */
 @media (min-width: 1025px) {
