@@ -1176,6 +1176,9 @@ a:focus {
     body {
         font-size: 12px;
     }
+    #podcast-grid {
+        flex-direction: column;
+    }
 }
 
 /* ==========================================================================
@@ -1353,10 +1356,6 @@ a:focus {
     .contact-item__link {
         font-size: 1rem;
         padding: var(--space-sm) var(--space-md);
-    }
-
-    #podcast-grid {
-        flex-direction: column;
     }
 
 
