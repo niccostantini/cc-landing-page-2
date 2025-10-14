@@ -493,22 +493,47 @@ function renderDirettivo(membri) {
     const container = document.getElementById('direttivo-grid');
     if (!container) return;
     
+    const cards = [];
+    
     membri.forEach(membro => {
         const card = createMembroCard(membro);
         container.appendChild(card);
+        cards.push(card);
     });
+    
+    // Add hover effects for better browser compatibility
+    setupMemberCardHoverEffects(cards);
 }
 
 /**
  * Create a single membro card
  */
 function createMembroCard(membro) {
-    const card = document.createElement('article');
-    card.className = 'membro';
-    
     const nomeCompleto = `${membro.nome} ${membro.cognome}`;
     const imagePath = `./assets/images/direttivo/${membro['nome-file-immagine']}`;
     const initials = getInitials(membro.nome, membro.cognome);
+    const hasSitoEsterno = membro['sito-esterno'] && membro['sito-esterno'].trim() !== '';
+    
+    // Determine element type based on external site
+    const card = hasSitoEsterno 
+        ? document.createElement('a') 
+        : document.createElement('article');
+    
+    // Set base class and link-specific attributes
+    card.className = 'membro';
+    
+    if (hasSitoEsterno) {
+        card.href = membro['sito-esterno'];
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.classList.add('membro--clickable');
+        card.setAttribute('title', `Visita il sito di ${nomeCompleto}`);
+    } else {
+        // Add class for empty external site (question mark cursor)
+        if (membro['sito-esterno'] === '') {
+            card.classList.add('membro--no-link');
+        }
+    }
     
     // Create avatar wrapper
     const avatarWrap = document.createElement('div');
@@ -562,6 +587,33 @@ function getInitials(nome, cognome) {
     const nomeInitial = nome.charAt(0).toUpperCase();
     const cognomeInitial = cognome.charAt(0).toUpperCase();
     return nomeInitial + cognomeInitial;
+}
+
+/**
+ * Setup hover effects for member cards with JavaScript for better browser compatibility
+ */
+function setupMemberCardHoverEffects(cards) {
+    const clickableCards = cards.filter(card => card.classList.contains('membro--clickable'));
+    
+    if (clickableCards.length === 0) return;
+    
+    clickableCards.forEach(clickableCard => {
+        clickableCard.addEventListener('mouseenter', () => {
+            // Add blur class to all non-clickable cards and other clickable cards
+            cards.forEach(card => {
+                if (card !== clickableCard) {
+                    card.classList.add('membro--blurred');
+                }
+            });
+        });
+        
+        clickableCard.addEventListener('mouseleave', () => {
+            // Remove blur class from all cards
+            cards.forEach(card => {
+                card.classList.remove('membro--blurred');
+            });
+        });
+    });
 }
 
 /**
@@ -975,7 +1027,9 @@ function renderGalleria(eventi) {
         card.type = 'button';
         card.className = 'galleria-folder';
         card.innerHTML = `
-            <div class="galleria-folder__icon" aria-hidden="true">📁</div>
+            <div class="galleria-folder__icon" aria-hidden="true">
+                <img src="./assets/images/album.png" alt="" width="80" height="80">
+            </div>
             <div class="galleria-folder__label">${escapeHtml(evento.nome)}</div>
         `;
         
@@ -997,7 +1051,9 @@ function showGalleriaFallback() {
     
     container.innerHTML = `
         <div class="galleria-folder">
-            <div class="galleria-folder__icon" aria-hidden="true">📁</div>
+            <div class="galleria-folder__icon" aria-hidden="true">
+                <img src="./assets/images/album.png" alt="" width="80" height="80">
+            </div>
             <div class="galleria-folder__label">Galleria non disponibile</div>
         </div>
     `;
@@ -1023,6 +1079,7 @@ function init() {
     
     // Modal functionality
     const contattiModal = new ModalManager('contatti-modal', 'contatti-btn');
+    const proveModal = new ModalManager('prove-modal', 'prove-btn');
     
     // Content loading
     loadDirettivo();

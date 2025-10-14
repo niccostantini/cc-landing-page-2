@@ -3,42 +3,49 @@
     "nome": "Alberto",
     "cognome": "Annarilli",
     "ruolo": "direttore",
-    "nome-file-immagine": "alberto.png"
+    "nome-file-immagine": "alberto.png",
+    "sito-esterno": "https://www.instagram.com/albertoannarilli/"
   },
   {
     "nome": "Laura",
     "cognome": "Tiberi",
     "ruolo": "contralto, co-fondatrice, tesoriera, rapporti istituzionali",
-    "nome-file-immagine": "laura.png"
+    "nome-file-immagine": "laura.png",
+    "sito-esterno": ""
   },
   {
     "nome": "Niccolò",
     "cognome": "Costantini",
     "ruolo": "basso, co-fondatore e coordinatore, webmaster",
-    "nome-file-immagine": "niccolo.png"
+    "nome-file-immagine": "niccolo.png",
+    "sito-esterno": "https://www.instagram.com/the_niccolo/"
   },
   {
     "nome": "Giordano",
     "cognome": "De Nisi",
     "ruolo": "co-fondatore, arrangiatore, consulente artistico",
-    "nome-file-immagine": "giordano.png"
+    "nome-file-immagine": "giordano.png",
+    "sito-esterno": "https://giordanodenisi.com/"
   },
   {
     "nome": "Sara",
     "cognome": "Cipullo",
     "ruolo": "contralto, social media strategist",
-    "nome-file-immagine": "sara.png"
+    "nome-file-immagine": "sara.png",
+    "sito-esterno": "https://www.instagram.com/sara.cipullo_/"
   },
   {
     "nome": "Marco",
     "cognome": "Pezzolla",
     "ruolo": "tenore, coordinatore del podcast",
-    "nome-file-immagine": "marco.png"
+    "nome-file-immagine": "marco.png",
+    "sito-esterno": ""
   },
   {
     "nome": "Eleonora",
     "cognome": "Piemontese",
     "ruolo": "contralto, organizzatrice delle fotocopie",
-    "nome-file-immagine": "eleonora.png"
+    "nome-file-immagine": "eleonora.png",
+    "sito-esterno": ""
   }
 ]
