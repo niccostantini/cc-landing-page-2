@@ -225,10 +225,42 @@ img, picture, video, canvas, svg {
     text-align: center;
 }
 
+.footer__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
 .footer__text {
     color: var(--muted);
     font-size: 0.875rem;
-    margin-bottom: var(--space-lg);
+    margin: 0;
+}
+
+.footer__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: 0.875rem;
+}
+
+.footer__link {
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer__link:hover,
+.footer__link:focus {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.footer__separator {
+    color: var(--muted);
+    font-weight: normal;
 }
 
 .footer__preview {
@@ -310,5 +342,151 @@ img, picture, video, canvas, svg {
     
     .contact-btn__text {
         font-size: 0.875rem;
+    }
+    
+    /* Footer responsive */
+    .footer__content {
+        gap: var(--space-md);
+    }
+    
+    .footer__links {
+        font-size: 0.8rem;
+        gap: var(--space-sm);
+    }
+}
+
+/* ==========================================================================
+   Policy Pages Styles
+   ========================================================================== */
+.policy-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
+    line-height: 1.7;
+}
+
+.policy-page h1 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--accent-2);
+    margin-bottom: var(--space-3xl);
+    text-align: center;
+}
+
+.policy-page h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-top: var(--space-3xl);
+    margin-bottom: var(--space-lg);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: var(--space-sm);
+}
+
+.policy-page h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--accent-2);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+}
+
+.policy-page p {
+    margin-bottom: var(--space-lg);
+    text-align: justify;
+}
+
+.policy-page ul {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-2xl);
+}
+
+.policy-page li {
+    margin-bottom: var(--space-sm);
+}
+
+.policy-page strong {
+    color: var(--accent-2);
+    font-weight: 600;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: var(--space-3xl);
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.contact-info {
+    background-color: var(--tint);
+    padding: var(--space-xl);
+    border-radius: var(--radius-sm);
+    margin: var(--space-3xl) 0;
+}
+
+.contact-info strong {
+    color: var(--ink);
+}
+
+.highlight-box {
+    background-color: var(--tint-2);
+    border-left: 4px solid var(--accent-2);
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
+}
+
+.info-box {
+    background-color: var(--tint);
+    border: 1px solid var(--accent);
+    padding: var(--space-lg);
+    border-radius: var(--radius-sm);
+    margin: var(--space-xl) 0;
+}
+
+.gdpr-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-xl) 0;
+}
+
+.gdpr-table th,
+.gdpr-table td {
+    border: 1px solid var(--border);
+    padding: var(--space-md);
+    text-align: left;
+}
+
+.gdpr-table th {
+    background-color: var(--tint);
+    font-weight: 600;
+    color: var(--ink);
+}
+
+/* Policy Pages Responsive */
+@media (max-width: 768px) {
+    .policy-page {
+        padding: var(--space-2xl) var(--space-lg);
+    }
+    
+    .policy-page h1 {
+        font-size: 2rem;
+    }
+    
+    .policy-page h2 {
+        font-size: 1.5rem;
+    }
+    
+    .gdpr-table {
+        font-size: 0.9rem;
+    }
+    
+    .gdpr-table th,
+    .gdpr-table td {
+        padding: var(--space-sm);
     }
 }

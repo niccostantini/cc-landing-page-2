@@ -280,6 +280,18 @@ a:focus {
     border-color: var(--accent);
 }
 
+.btn--yellow {
+    background-color: #f39c12;
+    border-color: #f39c12;
+    color: var(--white);
+}
+
+.btn--yellow:hover, .btn--yellow:focus {
+    background-color: #e67e22;
+    border-color: #e67e22;
+    color: var(--white);
+}
+
 /* ==========================================================================
    Site Header
    ========================================================================== */
@@ -823,15 +835,58 @@ a:focus {
     font-size: 0.875rem;
 }
 
-.rehearsal-info {
-    padding: var(--space-xl);
-    background-color: var(--tint);
-    border-radius: var(--radius-sm);
+/* Member card interactive states */
+.membro {
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.rehearsal-info h3 {
-    margin-bottom: var(--space-md);
+/* Clickable member cards */
+.membro--clickable {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
+
+.membro--clickable:hover,
+.membro--clickable:focus {
+    text-decoration: none;
+    color: inherit;
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Non-clickable cards with empty external site */
+.membro--no-link {
+    cursor: help;
+}
+
+.membro--no-link:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Blur effect for non-hovered cards when a clickable card is hovered */
+#direttivo-grid:has(.membro--clickable:hover) .membro:not(:hover) {
+    filter: blur(2px);
+    opacity: 0.6;
+    transform: scale(0.98);
+}
+
+/* Reset blur for the hovered card */
+#direttivo-grid:has(.membro--clickable:hover) .membro--clickable:hover {
+    filter: none;
+    opacity: 1;
+}
+
+/* JavaScript-controlled blur effect for better browser compatibility */
+.membro--blurred {
+    filter: blur(2px);
+    opacity: 0.6;
+    transform: scale(0.98);
+}
+
 
 /* ==========================================================================
    Carousel & Cards
@@ -1072,11 +1127,59 @@ a:focus {
 }
 
 /* ==========================================================================
+   Rehearsal Details
+   ========================================================================== */
+.rehearsal-details {
+    display: grid;
+    gap: var(--space-2xl);
+}
+
+.rehearsal-item {
+    text-align: center;
+}
+
+.rehearsal-item__label {
+    margin-bottom: var(--space-md);
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rehearsal-item__info {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+}
+
+.rehearsal-item__link {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid #f39c12;
+    border-radius: var(--radius-sm);
+    background-color: #f39c12;
+    color: var(--white);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.rehearsal-item__link:hover,
+.rehearsal-item__link:focus {
+    background-color: #e67e22;
+    border-color: #e67e22;
+    color: var(--white);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
    Footer
    ========================================================================== */
 .footer {
-
-    padding: var(--space-sm) var(--space-sm);
+    padding: var(--space-lg) var(--space-sm);
     border-top: 1px solid var(--border);
     position: sticky;
     bottom: 0;
@@ -1084,10 +1187,42 @@ a:focus {
     font-size: smaller;
 }
 
+.footer__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
 .footer__text {
     text-align: center;
     color: var(--muted);
     margin: 0;
+}
+
+.footer__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+}
+
+.footer__link {
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer__link:hover,
+.footer__link:focus {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.footer__separator {
+    color: var(--muted);
+    font-weight: normal;
 }
 
 /* ==========================================================================
@@ -1143,6 +1278,16 @@ a:focus {
         grid-template-columns: repeat(2, 1fr);
     }
     
+    /* Reduce member card hover effects on tablet */
+    .membro--clickable:hover,
+    .membro--clickable:focus {
+        transform: scale(1.03);
+    }
+    
+    .membro--no-link:hover {
+        transform: scale(1.01);
+    }
+    
     .events-grid {
         grid-template-columns: 1fr;
     }
@@ -1170,6 +1315,11 @@ a:focus {
     
     .content-col {
         width: 100%;
+    }
+    
+    /* Hide yellow button on mobile */
+    .btn--yellow {
+        display: none;
     }
     
     /* Typography */
@@ -1321,9 +1471,21 @@ a:focus {
         padding: var(--space-lg);
     }
     
-    .rehearsal-info {
-        padding: var(--space-lg);
+    /* Disable hover effects on mobile for better touch experience */
+    .membro--clickable:hover,
+    .membro--clickable:focus,
+    .membro--no-link:hover {
+        transform: none;
+        box-shadow: none;
     }
+    
+    /* Disable blur effects on mobile */
+    .membro--blurred {
+        filter: none;
+        opacity: 1;
+        transform: none;
+    }
+    
     
     .carousel-container {
         margin: 0 calc(-1 * var(--space-lg));
@@ -1356,6 +1518,15 @@ a:focus {
     .contact-item__link {
         font-size: 1rem;
         padding: var(--space-sm) var(--space-md);
+    }
+    
+    /* Footer responsive */
+    .footer__content {
+        gap: var(--space-sm);
+    }
+    
+    .footer__links {
+        font-size: 0.8rem;
     }
 
 
