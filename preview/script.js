@@ -507,7 +507,7 @@ function createMembroCard(membro) {
     card.className = 'membro';
     
     const nomeCompleto = `${membro.nome} ${membro.cognome}`;
-    const imagePath = `./assets/images/direttivo/${membro['nome-file-immagine']}.jpg`;
+    const imagePath = `./assets/images/direttivo/${membro['nome-file-immagine']}`;
     const initials = getInitials(membro.nome, membro.cognome);
     
     // Create avatar wrapper
