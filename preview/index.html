@@ -141,6 +141,7 @@
                         </div>
                         <nav class="site-header__nav" aria-label="Navigazione principale">
                             <button type="button" class="btn btn--filled" id="contatti-btn" aria-haspopup="dialog">Contattaci</button>
+                            <button type="button" class="btn btn--yellow" id="prove-btn" aria-haspopup="dialog">Prove settimanali</button>
                             <button type="button" class="menu-toggle" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Apri menu di navigazione">
                                 <span class="menu-toggle__icon">
                                     <span></span>
@@ -261,11 +262,6 @@
                         <div class="section__content">
                             <div id="direttivo-grid">
                                 <!-- I membri del direttivo vengono caricati dinamicamente via JavaScript -->
-                            </div>
-                            
-                            <div class="rehearsal-info">
-                                <h3>Prove settimanali</h3>
-                                <p>Ogni <strong>lunedì alle 20:30</strong><br>Spin Time Labs, Roma</p>
                             </div>
                         </div>
                     </div>
@@ -401,12 +397,63 @@
         </div>
     </div>
 
+    <!-- Modal Prove Settimanali -->
+    <div class="modal" id="prove-modal" role="dialog" aria-labelledby="prove-modal-title" aria-hidden="true">
+        <div class="modal__overlay" aria-hidden="true"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 id="prove-modal-title" class="modal__title">Prove settimanali</h2>
+                <button type="button" class="modal__close" aria-label="Chiudi modal prove">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="rehearsal-details">
+                    <div class="rehearsal-item">
+                        <h3 class="rehearsal-item__label">Quando</h3>
+                        <p class="rehearsal-item__info">Ogni <strong>lunedì alle 20:30</strong></p>
+                    </div>
+                    
+                    <div class="rehearsal-item">
+                        <h3 class="rehearsal-item__label">Dove</h3>
+                        <p class="rehearsal-item__info">
+                            <strong>Auditorium Jojo</strong><br>
+                            Via di S. Croce in Gerusalemme 55<br>
+                            Roma (RM)
+                        </p>
+                        <a href="https://maps.google.com/?q=Via+di+S.+Croce+in+Gerusalemme+55,+Roma" 
+                           class="rehearsal-item__link" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            📍 Vedi su Maps
+                        </a>
+                    </div>
+                    
+                    <div class="rehearsal-item">
+                        <h3 class="rehearsal-item__label">Info</h3>
+                        <p class="rehearsal-item__info">
+                            Le prove sono aperte a tutti! Non serve saper leggere la musica né avere esperienza precedente nel canto corale.
+                            Vieni quando puoi, porta la tua voce e la voglia di cantare insieme.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer__text">
-                &copy; ControCoro &mdash; @ Spin Time Labs, via di S. Croce in Gerusalmme 55, Roma (RM)
-            </p>
+            <div class="footer__content">
+                <p class="footer__text">
+                    &copy; ControCoro &mdash; @ Spin Time Labs, via di S. Croce in Gerusalemme 55, Roma (RM)
+                </p>
+                <div class="footer__links">
+                    <a href="privacy-policy.html" class="footer__link">Privacy Policy</a>
+                    <span class="footer__separator">•</span>
+                    <a href="cookie-policy.html" class="footer__link">Cookie Policy</a>
+                </div>
+            </div>
         </div>
     </footer>
 
