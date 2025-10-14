@@ -4,10 +4,29 @@
  */
 
 (async function initCarousel() {
+    console.log('[MOBILE DEBUG] Starting carousel initialization');
+    console.log('[MOBILE DEBUG] User agent:', navigator.userAgent);
+    console.log('[MOBILE DEBUG] Window size:', window.innerWidth, 'x', window.innerHeight);
+    
+    // Check browser API compatibility
+    console.log('[MOBILE DEBUG] API Support:', {
+        URLSearchParams: typeof URLSearchParams !== 'undefined',
+        fetch: typeof fetch !== 'undefined',
+        IntersectionObserver: typeof IntersectionObserver !== 'undefined',
+        requestAnimationFrame: typeof requestAnimationFrame !== 'undefined',
+        addEventListener: typeof document.addEventListener === 'function',
+        getElementById: typeof document.getElementById === 'function',
+        createElement: typeof document.createElement === 'function',
+        vibrate: typeof navigator.vibrate === 'function',
+        Promise: typeof Promise !== 'undefined'
+    });
+    
     const qs = new URLSearchParams(location.search);
     let baseDir = qs.get('dir') || '';
     const title = qs.get('title') || 'Galleria';
     document.title = title;
+    
+    console.log('[MOBILE DEBUG] URL params - dir:', baseDir, 'title:', title);
 
     // Normalize directory parameter
     if (baseDir) {
@@ -26,22 +45,28 @@
     }
 
     // Security check: validate directory path
+    console.log('[MOBILE DEBUG] Validating baseDir:', baseDir);
     if (!baseDir.startsWith('./assets/events/')) {
-        console.error('Invalid directory path:', baseDir);
+        console.error('[MOBILE DEBUG] Invalid directory path:', baseDir);
         document.body.textContent = 'Percorso non valido.';
         return;
     }
+    console.log('[MOBILE DEBUG] Directory path is valid');
 
     // Fetch media manifest
+    console.log('[MOBILE DEBUG] Fetching manifest from:', `${baseDir}/media.json`);
     let manifestRes;
     try {
         manifestRes = await fetch(`${baseDir}/media.json`);
+        console.log('[MOBILE DEBUG] Manifest fetch successful:', manifestRes.status, manifestRes.statusText);
     } catch (error) {
+        console.error('[MOBILE DEBUG] Manifest fetch failed:', error);
         document.body.textContent = 'Errore di connessione.';
         return;
     }
 
     if (!manifestRes.ok) {
+        console.error('[MOBILE DEBUG] Manifest not ok:', manifestRes.status, manifestRes.statusText);
         document.body.textContent = 'Nessun media trovato.';
         return;
     }
@@ -49,40 +74,56 @@
     let manifest;
     try {
         manifest = await manifestRes.json();
+        console.log('[MOBILE DEBUG] Manifest parsed successfully:', manifest);
     } catch (error) {
+        console.error('[MOBILE DEBUG] Manifest JSON parse failed:', error);
         document.body.textContent = 'Formato media non valido.';
         return;
     }
 
     const media = manifest.media || [];
+    console.log('[MOBILE DEBUG] Media items found:', media.length);
     
     // Filter supported formats
     const allowed = (filename) => /\.(jpe?g|webp|mp4)$/i.test(filename);
     const items = media.filter(m => m && m.src && allowed(m.src));
+    console.log('[MOBILE DEBUG] Filtered media items:', items.length);
 
     if (items.length === 0) {
+        console.error('[MOBILE DEBUG] No supported media found');
         document.body.textContent = 'Nessun media supportato trovato.';
         return;
     }
 
     // Initialize carousel state
+    console.log('[MOBILE DEBUG] Getting DOM elements');
     const container = document.getElementById('carousel');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
     const closeBtn = document.getElementById('close');
     
-    // Create mobile navigation areas
-    const navPrev = document.createElement('div');
-    navPrev.className = 'nav-area nav-area--prev';
-    navPrev.innerHTML = '<div class="nav-area__icon">‹</div>';
-    navPrev.setAttribute('aria-label', 'Slide precedente (area touch)');
-    document.body.appendChild(navPrev);
+    console.log('[MOBILE DEBUG] DOM elements found:', {
+        container: !!container,
+        prevBtn: !!prevBtn,
+        nextBtn: !!nextBtn,
+        closeBtn: !!closeBtn
+    });
     
-    const navNext = document.createElement('div');
-    navNext.className = 'nav-area nav-area--next';
-    navNext.innerHTML = '<div class="nav-area__icon">›</div>';
-    navNext.setAttribute('aria-label', 'Slide successiva (area touch)');
-    document.body.appendChild(navNext);
+    // Create mobile edge zones
+    const edgePrev = document.createElement('div');
+    edgePrev.className = 'nav-edge nav-edge--prev';
+    edgePrev.setAttribute('aria-label', 'Area navigazione precedente');
+    document.body.appendChild(edgePrev);
+    
+    const edgeNext = document.createElement('div');
+    edgeNext.className = 'nav-edge nav-edge--next';
+    edgeNext.setAttribute('aria-label', 'Area navigazione successiva');
+    document.body.appendChild(edgeNext);
+    
+    // Create no-touch belt for video controls
+    const noTouchBelt = document.createElement('div');
+    noTouchBelt.className = 'no-touch-belt';
+    document.body.appendChild(noTouchBelt);
     
     // Create indicators
     const indicators = document.createElement('div');
@@ -108,8 +149,18 @@
     container.setAttribute('role', 'img');
     
     // Get initial slide index from hash
-    let index = Math.max(0, parseInt((location.hash.match(/slide=(\d+)/) || [])[1] || '0', 10));
-    if (index >= items.length) index = 0;
+    let index = 0;
+    try {
+        const hashMatch = location.hash.match(/slide=(\d+)/);
+        if (hashMatch && hashMatch[1]) {
+            index = Math.max(0, parseInt(hashMatch[1], 10));
+            if (index >= items.length) index = 0;
+        }
+        console.log('[MOBILE DEBUG] Initial slide index:', index);
+    } catch (error) {
+        console.warn('[MOBILE DEBUG] Hash parsing error:', error);
+        index = 0;
+    }
 
     /**
      * Escape HTML to prevent XSS
@@ -129,7 +180,9 @@
      * Render current slide
      */
     function render(slideIndex) {
-        container.innerHTML = '';
+        console.log('[MOBILE DEBUG] Rendering slide:', slideIndex, 'of', items.length);
+        try {
+            container.innerHTML = '';
         
         if (!items.length) {
             container.textContent = 'Vuoto.';
@@ -169,14 +222,23 @@
         // Update indicators
         counterEl.textContent = `${slideIndex + 1} / ${items.length}`;
         titleEl.textContent = title;
+        console.log('[MOBILE DEBUG] Slide rendered successfully');
+        } catch (error) {
+            console.error('[MOBILE DEBUG] Render error:', error);
+            throw error;
+        }
     }
 
     /**
      * Haptic feedback for mobile devices
      */
     function hapticFeedback() {
-        if (navigator.vibrate && window.innerWidth <= 640) {
-            navigator.vibrate(50); // Light vibration
+        try {
+            if (navigator.vibrate && window.innerWidth <= 640) {
+                navigator.vibrate(50); // Light vibration
+            }
+        } catch (error) {
+            console.warn('[MOBILE DEBUG] Haptic feedback error:', error);
         }
     }
 
@@ -212,31 +274,28 @@
         }
     });
     
-    navPrev.addEventListener('click', (e) => {
+    edgePrev.addEventListener('click', (e) => {
         e.preventDefault();
         prev();
     });
     
-    navNext.addEventListener('click', (e) => {
+    edgeNext.addEventListener('click', (e) => {
         e.preventDefault();
         next();
     });
     
-    // Show navigation hints briefly on load (mobile only)
-    function showNavigationHints() {
+    let swipeThreshold = 50; // Adaptive threshold
+
+    // Enhanced swipe detection for mobile
+    function enhanceSwipeDetection() {
         if (window.innerWidth <= 640) {
-            navPrev.classList.add('show-hint');
-            navNext.classList.add('show-hint');
-            
-            setTimeout(() => {
-                navPrev.classList.remove('show-hint');
-                navNext.classList.remove('show-hint');
-            }, 2000);
+            swipeThreshold = Math.min(50, window.innerWidth * 0.15);
         }
     }
     
-    // Show hints after initial render
-    setTimeout(showNavigationHints, 1000);
+    // Update swipe threshold on resize
+    window.addEventListener('resize', enhanceSwipeDetection);
+    enhanceSwipeDetection();
 
     // Keyboard navigation
     window.addEventListener('keydown', (e) => {
@@ -256,58 +315,81 @@
         }
     });
 
-    // Touch/pointer events for swipe
+    // Touch/pointer events for swipe  
+    console.log('[MOBILE DEBUG] Setting up touch/pointer events');
+    console.log('[MOBILE DEBUG] Touch API support:', {
+        touchEvents: 'ontouchstart' in window,
+        pointerEvents: 'onpointerdown' in window,
+        TouchEvent: typeof TouchEvent !== 'undefined',
+        PointerEvent: typeof PointerEvent !== 'undefined'
+    });
+    
     let startX = 0;
     let startY = 0;
     let isVerticalScroll = false;
     let isSwipeInProgress = false;
-    let swipeThreshold = 50; // Adaptive threshold
 
-    container.addEventListener('pointerdown', (e) => {
-        startX = e.clientX;
-        startY = e.clientY;
-        isVerticalScroll = false;
-        isSwipeInProgress = true;
-        
-        // Visual feedback
-        container.style.cursor = 'grabbing';
-    });
+    // Add pointer events with error handling
+    try {
+        container.addEventListener('pointerdown', (e) => {
+            startX = e.clientX;
+            startY = e.clientY;
+            isVerticalScroll = false;
+            isSwipeInProgress = true;
+            
+            // Visual feedback
+            container.style.cursor = 'grabbing';
+        });
+        console.log('[MOBILE DEBUG] pointerdown listener added');
+    } catch (error) {
+        console.error('[MOBILE DEBUG] Failed to add pointerdown listener:', error);
+    }
 
-    container.addEventListener('pointermove', (e) => {
-        if (!startX || !startY) return;
-        
-        const deltaX = Math.abs(e.clientX - startX);
-        const deltaY = Math.abs(e.clientY - startY);
-        
-        // Detect if this is a vertical scroll gesture
-        if (deltaY > deltaX && deltaY > 20) {
-            isVerticalScroll = true;
-        }
-    });
-
-    container.addEventListener('pointerup', (e) => {
-        if (!startX || isVerticalScroll) {
-            resetSwipeState();
-            return;
-        }
-
-        const deltaX = e.clientX - startX;
-        
-        // Adaptive threshold based on screen size
-        const screenWidth = window.innerWidth;
-        swipeThreshold = screenWidth < 640 ? 30 : 40;
-        
-        // Swipe detection
-        if (Math.abs(deltaX) > swipeThreshold) {
-            if (deltaX < 0) {
-                next(); // Swipe left -> next
-            } else {
-                prev(); // Swipe right -> prev
+    try {
+        container.addEventListener('pointermove', (e) => {
+            if (!startX || !startY) return;
+            
+            const deltaX = Math.abs(e.clientX - startX);
+            const deltaY = Math.abs(e.clientY - startY);
+            
+            // Detect if this is a vertical scroll gesture
+            if (deltaY > deltaX && deltaY > 20) {
+                isVerticalScroll = true;
             }
-        }
-        
-        resetSwipeState();
-    });
+        });
+        console.log('[MOBILE DEBUG] pointermove listener added');
+    } catch (error) {
+        console.error('[MOBILE DEBUG] Failed to add pointermove listener:', error);
+    }
+
+    try {
+        container.addEventListener('pointerup', (e) => {
+            if (!startX || isVerticalScroll) {
+                resetSwipeState();
+                return;
+            }
+
+            const deltaX = e.clientX - startX;
+            
+            // Adaptive threshold based on screen size
+            const screenWidth = window.innerWidth;
+            swipeThreshold = screenWidth < 640 ? 30 : 40;
+            
+            // Swipe detection
+            if (Math.abs(deltaX) > swipeThreshold) {
+                if (deltaX < 0) {
+                    next(); // Swipe left -> next
+                } else {
+                    prev(); // Swipe right -> prev
+                }
+            }
+            
+            resetSwipeState();
+        });
+        console.log('[MOBILE DEBUG] pointerup listener added');
+    } catch (error) {
+        console.error('[MOBILE DEBUG] Failed to add pointerup listener:', error);
+    }
     
     function resetSwipeState() {
         startX = 0;
@@ -358,10 +440,27 @@
         resetSwipeState();
     }, { passive: true });
 
+    console.log('[MOBILE DEBUG] About to render initial slide:', index);
     // Initial render
     render(index);
+    console.log('[MOBILE DEBUG] Carousel initialization completed successfully');
 
 })().catch(error => {
-    console.error('Carousel initialization error:', error);
-    document.body.textContent = 'Errore di inizializzazione carosello.';
+    console.error('[MOBILE DEBUG] Carousel initialization error:', error);
+    console.error('[MOBILE DEBUG] Error name:', error.name);
+    console.error('[MOBILE DEBUG] Error message:', error.message);
+    console.error('[MOBILE DEBUG] Error stack:', error.stack);
+    console.error('[MOBILE DEBUG] Current URL:', location.href);
+    console.error('[MOBILE DEBUG] Current params:', location.search);
+    document.body.innerHTML = `
+        <div style="padding: 20px; font-family: sans-serif; color: white; background: #111;">
+            <h2>Errore di inizializzazione carosello</h2>
+            <p><strong>Error:</strong> ${error.message}</p>
+            <p><strong>Type:</strong> ${error.name}</p>
+            <details>
+                <summary>Debug Info</summary>
+                <pre style="background: #222; padding: 10px; white-space: pre-wrap;">${error.stack || 'No stack trace available'}</pre>
+            </details>
+        </div>
+    `;
 });
