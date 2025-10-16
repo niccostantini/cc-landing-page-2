@@ -25,8 +25,13 @@ function debounce(func, wait) {
 /**
  * Format date to Italian locale
  */
+function isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+}
+
 function formatDate(dateString) {
     const date = new Date(dateString);
+    if (!isValidDate(date)) return dateString
     return date.toLocaleDateString('it-IT', {
         day: 'numeric',
         month: 'long',
