@@ -24,14 +24,6 @@
     "visible": 1
   },
   {
-    "nome": "Festival Estivo",
-    "data": "2025-01-01",
-    "precision": "year",
-    "luogo": "Da definire",
-    "directory": "",
-    "visible": 1
-  },
-  {
     "nome": "Varie",
     "data": "",
     "precision": "day",
@@ -43,8 +35,8 @@
     "nome": "Concerto chiesa delle Francescane",
     "data": "2024-12-15",
     "precision": "day",
-    "luogo": "Abbazia di San Nilo, Grottaferrata",
+    "luogo": "Chiesa delle Francescane, Grottaferrata",
     "directory": "./assets/events/abbazia-san-nilo",
-    "visible": 0
+    "visible": 1
   }
 ]
