@@ -1366,6 +1366,17 @@ section:last-of-type {
     font-size: 48px;
     line-height: 1;
     display: block;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+}
+
+.galleria-folder__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
 }
 
 /* Etichetta nome cartella */
@@ -1388,6 +1399,8 @@ section:last-of-type {
     
     .galleria-folder__icon {
         font-size: 40px;
+        width: 64px;
+        height: 64px;
     }
     
     .galleria-folder__label {
@@ -1408,6 +1421,8 @@ section:last-of-type {
     
     .galleria-folder__icon {
         font-size: 36px;
+        width: 56px;
+        height: 56px;
     }
     
     .galleria-folder__label {

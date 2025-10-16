@@ -1000,7 +1000,7 @@ async function loadGalleria() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const eventi = await response.json();
-        renderGalleria(eventi);
+        await renderGalleria(eventi);
     } catch (error) {
         console.error('Error loading galleria:', error);
         showGalleriaFallback();
@@ -1008,9 +1008,53 @@ async function loadGalleria() {
 }
 
 /**
+ * Get first image from media.json for thumbnail
+ */
+async function getFirstImageThumbnail(directory) {
+    try {
+        // Normalize directory path to relative format
+        const normalizedDir = directory.startsWith('/') ? directory.substring(1) : directory;
+        const adjustedDir = normalizedDir.startsWith('assets/') ? './' + normalizedDir : directory;
+        
+        const mediaPath = `${adjustedDir}/media.json`;
+        const response = await fetch(mediaPath);
+        
+        if (!response.ok) {
+            return null; // No media.json found
+        }
+        
+        const mediaData = await response.json();
+        
+        // Check if mediaData has the expected structure
+        const mediaList = mediaData.media || mediaData;
+        if (!Array.isArray(mediaList)) {
+            console.warn('Invalid media.json structure for', directory);
+            return null;
+        }
+        
+        // Find first image in the media list
+        const firstImage = mediaList.find(item => {
+            if (!item.src || !item.type) return false;
+            return item.type === 'image' || 
+                   item.src.toLowerCase().match(/\.(jpg|jpeg|png|webp|gif)$/i);
+        });
+        
+        if (firstImage) {
+            // Construct full image path
+            return `${adjustedDir}/${firstImage.src}`;
+        }
+        
+        return null; // No images found
+    } catch (error) {
+        console.warn('Error loading thumbnail for', directory, ':', error);
+        return null;
+    }
+}
+
+/**
  * Render galleria folders
  */
-function renderGalleria(eventi) {
+async function renderGalleria(eventi) {
     const container = document.getElementById('galleria-grid');
     if (!container) return;
     
@@ -1057,26 +1101,41 @@ function renderGalleria(eventi) {
     // Clear existing content
     container.innerHTML = '';
     
-    validEvents.forEach(evento => {
-        // All events are pre-filtered, so no need for additional checks
-        
+    // Process each event and load thumbnails
+    for (const evento of validEvents) {
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'galleria-folder';
+        
+        // Create initial card with placeholder
         card.innerHTML = `
             <div class="galleria-folder__icon" aria-hidden="true">
-                <img src="./assets/images/album.png" alt="" width="80" height="80">
+                <img src="./assets/images/album.png" alt="" width="80" height="80" class="galleria-thumbnail">
             </div>
             <div class="galleria-folder__label">${escapeHtml(evento.nome)}</div>
         `;
         
+        // Add click handler
         card.addEventListener('click', () => {
             const url = `gallery.html?dir=${encodeURIComponent(evento.directory)}&title=${encodeURIComponent(evento.nome)}`;
             window.open(url, 'window', 'toolbar=no,menubar=no,resizable=yes');
         });
         
         container.appendChild(card);
-    });
+        
+        // Load thumbnail asynchronously
+        getFirstImageThumbnail(evento.directory).then(thumbnailPath => {
+            if (thumbnailPath) {
+                const img = card.querySelector('.galleria-thumbnail');
+                if (img) {
+                    img.src = thumbnailPath;
+                    img.style.objectFit = 'cover';
+                }
+            }
+        }).catch(error => {
+            console.warn('Failed to load thumbnail for', evento.nome, ':', error);
+        });
+    }
 }
 
 /**
