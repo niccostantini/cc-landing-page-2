@@ -396,7 +396,7 @@ a:focus {
 .sidenav {
     position: sticky;
     top: 0;
-    height: 91vh;
+    height: 95vh;
     width: 320px;
     flex-shrink: 0;
     background: var(--white);
@@ -654,6 +654,10 @@ a:focus {
 .section:nth-of-type(even) {
     background: var(--tint);
     border-top: 2px solid var(--sep-on-tint);
+}
+
+section:last-of-type {
+    min-height: 550px;
 }
 
 .section__title {
