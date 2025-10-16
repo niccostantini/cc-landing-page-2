@@ -474,6 +474,9 @@ function renderRepertorio(pezzi) {
     const container = document.getElementById('repertorio-carousel');
     if (!container) return;
     
+    // Store data for filtering
+    window.repertorioData = pezzi;
+    
     const carousel = document.createElement('div');
     carousel.className = 'carousel';
     
@@ -483,6 +486,9 @@ function renderRepertorio(pezzi) {
     });
     
     container.appendChild(carousel);
+    
+    // Generate and setup tag filters
+    setupRepertorioFilters(pezzi);
 }
 
 /**
@@ -493,6 +499,12 @@ function createRepertorioCard(pezzo) {
     card.className = 'repertorio-card';
 
     const tags = Array.isArray(pezzo.Tag) ? pezzo.Tag : [pezzo.Tag].filter(Boolean);
+    
+    // Create data-tags attribute with normalized tag slugs
+    const tagSlugs = tags.map(tag => normalizeTagSlug(tag));
+    card.setAttribute('data-tags', tagSlugs.join(','));
+    card.setAttribute('aria-hidden', 'false');
+    
     const tagsHtml = tags
         .map(t => `<span class="repertorio-card__tag">${escapeHtml(t)}</span>`)
         .join('');
@@ -504,6 +516,253 @@ function createRepertorioCard(pezzo) {
   `;
 
     return card;
+}
+
+/**
+ * Normalize tag to slug format (lowercase, no accents, trimmed)
+ */
+function normalizeTagSlug(tag) {
+    return tag
+        .toString()
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove accents
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single
+        .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+}
+
+/**
+ * Setup repertorio tag filters
+ */
+function setupRepertorioFilters(pezzi) {
+    // Extract all unique tags
+    const allTags = new Set();
+    pezzi.forEach(pezzo => {
+        const tags = Array.isArray(pezzo.Tag) ? pezzo.Tag : [pezzo.Tag].filter(Boolean);
+        tags.forEach(tag => allTags.add(tag));
+    });
+    
+    // Sort tags alphabetically
+    const sortedTags = Array.from(allTags).sort((a, b) => a.localeCompare(b, 'it'));
+    
+    // Generate filter buttons
+    generateTagFilters(sortedTags);
+    
+    // Initialize filter state from URL or localStorage
+    initTagFilters(sortedTags);
+}
+
+/**
+ * Generate tag filter buttons
+ */
+function generateTagFilters(tags) {
+    const container = document.getElementById('repertorio-filters');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    // Add reset button
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'tag-filter tag-filter--reset';
+    resetBtn.textContent = 'Reimposta';
+    resetBtn.addEventListener('click', resetAllTagFilters);
+    container.appendChild(resetBtn);
+    
+    // Add tag filter buttons
+    tags.forEach(tag => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'tag-filter';
+        button.setAttribute('data-tag', normalizeTagSlug(tag));
+        button.setAttribute('aria-pressed', 'true'); // All active by default
+        button.textContent = tag;
+        
+        button.addEventListener('click', () => toggleTagFilter(button));
+        button.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                toggleTagFilter(button);
+            }
+        });
+        
+        container.appendChild(button);
+    });
+}
+
+/**
+ * Initialize tag filters from URL or localStorage
+ */
+function initTagFilters(allTags) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTags = urlParams.get('tags');
+    
+    if (urlTags) {
+        // Use URL state
+        const activeTags = urlTags.split(',').map(tag => tag.trim()).filter(Boolean);
+        setTagFilterState(activeTags);
+    } else {
+        // Check localStorage
+        const savedTags = localStorage.getItem('repertorio-tags');
+        if (savedTags) {
+            try {
+                const activeTags = JSON.parse(savedTags);
+                setTagFilterState(activeTags);
+            } catch (e) {
+                // If parsing fails, activate all tags
+                setTagFilterState(allTags.map(tag => normalizeTagSlug(tag)));
+            }
+        } else {
+            // Default: all tags active
+            setTagFilterState(allTags.map(tag => normalizeTagSlug(tag)));
+        }
+    }
+    
+    applyTagFilters();
+}
+
+/**
+ * Set tag filter state
+ */
+function setTagFilterState(activeTags) {
+    const tagButtons = document.querySelectorAll('.tag-filter:not(.tag-filter--reset)');
+    tagButtons.forEach(button => {
+        const tagSlug = button.getAttribute('data-tag');
+        const isActive = activeTags.includes(tagSlug);
+        button.setAttribute('aria-pressed', isActive.toString());
+    });
+}
+
+/**
+ * Toggle individual tag filter
+ */
+function toggleTagFilter(button) {
+    const isPressed = button.getAttribute('aria-pressed') === 'true';
+    button.setAttribute('aria-pressed', (!isPressed).toString());
+    
+    applyTagFilters();
+    updateTagFiltersURL();
+}
+
+/**
+ * Reset all tag filters to active state
+ */
+function resetAllTagFilters() {
+    const tagButtons = document.querySelectorAll('.tag-filter:not(.tag-filter--reset)');
+    tagButtons.forEach(button => {
+        button.setAttribute('aria-pressed', 'true');
+    });
+    
+    applyTagFilters();
+    updateTagFiltersURL();
+}
+
+/**
+ * Apply tag filters to repertorio cards
+ */
+function applyTagFilters() {
+    const tagButtons = document.querySelectorAll('.tag-filter:not(.tag-filter--reset)');
+    const selectedTags = Array.from(tagButtons)
+        .filter(btn => btn.getAttribute('aria-pressed') === 'true')
+        .map(btn => btn.getAttribute('data-tag'));
+    
+    const cards = document.querySelectorAll('.repertorio-card');
+    const carousel = document.querySelector('#repertorio-carousel .carousel');
+    let visibleCount = 0;
+    
+    if (selectedTags.length === 0) {
+        // No tags selected, hide all and show message
+        cards.forEach(card => {
+            card.classList.add('is-hidden');
+            card.setAttribute('aria-hidden', 'true');
+        });
+        
+        showNoResultsMessage();
+    } else {
+        // Apply union logic: show cards that have at least one selected tag
+        cards.forEach(card => {
+            const cardTags = card.getAttribute('data-tags').split(',').filter(Boolean);
+            const hasMatchingTag = cardTags.some(tag => selectedTags.includes(tag));
+            
+            if (hasMatchingTag) {
+                card.classList.remove('is-hidden');
+                card.setAttribute('aria-hidden', 'false');
+                visibleCount++;
+            } else {
+                card.classList.add('is-hidden');
+                card.setAttribute('aria-hidden', 'true');
+            }
+        });
+        
+        hideNoResultsMessage();
+    }
+    
+    updateRepertorioCount(visibleCount);
+    
+    // Save to localStorage
+    localStorage.setItem('repertorio-tags', JSON.stringify(selectedTags));
+}
+
+/**
+ * Update repertorio count display
+ */
+function updateRepertorioCount(count) {
+    const countContainer = document.getElementById('repertorio-count');
+    if (!countContainer) return;
+    
+    const text = count === 1 ? '1 brano' : `${count} brani`;
+    countContainer.textContent = text;
+}
+
+/**
+ * Show no results message
+ */
+function showNoResultsMessage() {
+    const carousel = document.querySelector('#repertorio-carousel .carousel');
+    if (!carousel) return;
+    
+    let message = carousel.querySelector('.repertorio-no-results');
+    if (!message) {
+        message = document.createElement('div');
+        message.className = 'repertorio-no-results';
+        message.textContent = 'Nessun brano con i filtri correnti';
+        carousel.appendChild(message);
+    }
+    message.style.display = 'block';
+}
+
+/**
+ * Hide no results message
+ */
+function hideNoResultsMessage() {
+    const message = document.querySelector('.repertorio-no-results');
+    if (message) {
+        message.style.display = 'none';
+    }
+}
+
+/**
+ * Update URL with current tag filter state
+ */
+function updateTagFiltersURL() {
+    const tagButtons = document.querySelectorAll('.tag-filter:not(.tag-filter--reset)');
+    const selectedTags = Array.from(tagButtons)
+        .filter(btn => btn.getAttribute('aria-pressed') === 'true')
+        .map(btn => btn.getAttribute('data-tag'));
+    
+    const url = new URL(window.location);
+    
+    if (selectedTags.length > 0) {
+        url.searchParams.set('tags', selectedTags.join(','));
+    } else {
+        url.searchParams.delete('tags');
+    }
+    
+    // Update URL without page reload
+    window.history.replaceState({}, '', url);
 }
 
 /**
