@@ -743,10 +743,19 @@ function renderEventi(eventi) {
     const container = document.getElementById('concerti-grid');
     if (!container) return;
     
+    // Store events data for filtering
+    window.eventiData = eventi;
+    
     eventi.forEach(evento => {
         const card = createEventoCard(evento);
+        // Add data attribute for event date to enable filtering
+        card.setAttribute('data-event-date', evento.data);
+        card.setAttribute('aria-hidden', 'false');
         container.appendChild(card);
     });
+    
+    // Initialize filter functionality
+    initEventFilter();
 }
 
 /**
@@ -767,6 +776,91 @@ function createEventoCard(evento) {
     `;
     
     return card;
+}
+
+/**
+ * Initialize event filter functionality
+ */
+function initEventFilter() {
+    const filterBtn = document.getElementById('filter-future');
+    if (!filterBtn) return;
+    
+    // Check URL parameter on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const shouldFilterFuture = urlParams.get('futuri') === '1';
+    
+    if (shouldFilterFuture) {
+        filterBtn.setAttribute('aria-pressed', 'true');
+        applyFutureFilter(true);
+    }
+    
+    // Add click handler
+    filterBtn.addEventListener('click', () => {
+        const isPressed = filterBtn.getAttribute('aria-pressed') === 'true';
+        const newState = !isPressed;
+        
+        filterBtn.setAttribute('aria-pressed', newState.toString());
+        applyFutureFilter(newState);
+        updateURL(newState);
+    });
+}
+
+/**
+ * Apply or remove future event filter
+ */
+function applyFutureFilter(showOnlyFuture) {
+    const eventCards = document.querySelectorAll('.evento-card');
+    const today = getTodayInRome();
+    
+    eventCards.forEach(card => {
+        const eventDateStr = card.getAttribute('data-event-date');
+        
+        if (!eventDateStr || eventDateStr === '' || eventDateStr === '0') {
+            // Events without valid dates are always shown
+            card.classList.remove('is-hidden');
+            card.setAttribute('aria-hidden', 'false');
+            return;
+        }
+        
+        const eventDate = new Date(eventDateStr);
+        const isPastEvent = eventDate < today;
+        
+        if (showOnlyFuture && isPastEvent) {
+            card.classList.add('is-hidden');
+            card.setAttribute('aria-hidden', 'true');
+        } else {
+            card.classList.remove('is-hidden');
+            card.setAttribute('aria-hidden', 'false');
+        }
+    });
+}
+
+/**
+ * Get today's date at 00:00 in Europe/Rome timezone
+ */
+function getTodayInRome() {
+    const now = new Date();
+    // Create date in Rome timezone
+    const romeDate = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Rome' }));
+    // Set to start of day (00:00)
+    romeDate.setHours(0, 0, 0, 0);
+    return romeDate;
+}
+
+/**
+ * Update URL with filter state
+ */
+function updateURL(showOnlyFuture) {
+    const url = new URL(window.location);
+    
+    if (showOnlyFuture) {
+        url.searchParams.set('futuri', '1');
+    } else {
+        url.searchParams.delete('futuri');
+    }
+    
+    // Update URL without page reload
+    window.history.replaceState({}, '', url);
 }
 
 /**
