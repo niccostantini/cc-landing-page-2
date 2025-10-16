@@ -494,10 +494,9 @@ a:focus {
 .navbar-tablet__list {
     list-style: none;
     display: flex;
-    gap: var(--space-lg);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    flex-wrap: wrap;
+    row-gap: 0;
+    column-gap: var(--space-lg);
 }
 
 .navbar-tablet__list::-webkit-scrollbar {
