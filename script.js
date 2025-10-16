@@ -1487,7 +1487,7 @@ async function renderGalleria(eventi) {
         // Create initial card with placeholder
         card.innerHTML = `
             <div class="galleria-folder__icon" aria-hidden="true">
-                <img src="./assets/images/album.png" alt="" width="80" height="80" class="galleria-thumbnail">
+                <img src="assets/images/album.png" alt="" width="80" height="80" class="galleria-thumbnail">
             </div>
             <div class="galleria-folder__label">${escapeHtml(evento.nome)}</div>
         `;
@@ -1525,7 +1525,7 @@ function showGalleriaFallback() {
     container.innerHTML = `
         <div class="galleria-folder">
             <div class="galleria-folder__icon" aria-hidden="true">
-                <img src="./assets/images/album.png" alt="" width="80" height="80">
+                <img src="assets/images/album.png" alt="" width="80" height="80">
             </div>
             <div class="galleria-folder__label">Galleria non disponibile</div>
         </div>
