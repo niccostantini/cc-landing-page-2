@@ -393,7 +393,7 @@ a:focus {
 .sidenav {
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 91vh;
     width: 320px;
     flex-shrink: 0;
     background: var(--white);
@@ -1198,6 +1198,8 @@ a:focus {
     color: var(--muted);
     text-decoration: none;
     transition: color 0.2s ease;
+    font-weight: 600;
+    color: var(--accent-2)
 }
 
 .footer__link:hover,
