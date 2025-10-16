@@ -253,13 +253,14 @@ a:focus {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-sm) var(--space-lg);
     border: 1px solid var(--ink);
     border-radius: var(--radius-full);
     background: transparent;
     color: var(--ink);
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -853,7 +854,7 @@ a:focus {
     text-decoration: none;
     color: inherit;
     transform: scale(1.05);
-    z-index: 10;
+    z-index: 5;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -1179,38 +1180,23 @@ a:focus {
    Footer
    ========================================================================== */
 .footer {
-    padding: var(--space-lg) var(--space-sm);
+    padding: var(--space-sm) var(--space-sm);
     border-top: 1px solid var(--border);
     position: sticky;
     bottom: 0;
     background-color: var(--white);
     font-size: smaller;
+    z-index: 100;
 }
-
-.footer__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
-}
-
 .footer__text {
     text-align: center;
     color: var(--muted);
     margin: 0;
 }
 
-.footer__links {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: 0.875rem;
-}
-
 .footer__link {
-    color: var(--accent-2);
+    color: var(--muted);
     text-decoration: none;
-    font-weight: 500;
     transition: color 0.2s ease;
 }
 
@@ -1218,11 +1204,6 @@ a:focus {
 .footer__link:focus {
     color: var(--accent);
     text-decoration: underline;
-}
-
-.footer__separator {
-    color: var(--muted);
-    font-weight: normal;
 }
 
 /* ==========================================================================
@@ -1317,9 +1298,10 @@ a:focus {
         width: 100%;
     }
     
-    /* Hide yellow button on mobile */
-    .btn--yellow {
-        display: none;
+    /* Make buttons even smaller on mobile to fit both */
+    .btn {
+        padding: var(--space-xs) var(--space-md);
+        font-size: 0.8rem;
     }
     
     /* Typography */

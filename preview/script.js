@@ -61,9 +61,10 @@ class NavigationManager {
         this.setupScrollSpy();
         this.setupMobileMenu();
         
-        // Update header offset on resize
+        // Update header offset on resize and recalculate active section
         window.addEventListener('resize', debounce(() => {
             this.headerOffset = this.getHeaderOffset();
+            this.updateActiveSection();
         }, 250));
     }
     
@@ -115,22 +116,53 @@ class NavigationManager {
     }
     
     setupScrollSpy() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: `-${this.headerOffset}px 0px -50% 0px`
+        // Use scroll-based detection for more stable behavior
+        let scrollTimeout;
+        
+        const handleScroll = () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                this.updateActiveSection();
+            }, 10);
         };
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.setActiveSection(entry.target.id);
-                }
-            });
-        }, observerOptions);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         
-        this.sections.forEach(section => {
-            observer.observe(section.element);
-        });
+        // Initial check
+        this.updateActiveSection();
+    }
+    
+    updateActiveSection() {
+        const scrollPosition = window.scrollY + this.headerOffset + 50;
+        
+        let activeSection = null;
+        
+        // Find the section that should be active based on scroll position
+        for (let i = 0; i < this.sections.length; i++) {
+            const section = this.sections[i];
+            const sectionTop = section.element.offsetTop;
+            const sectionBottom = sectionTop + section.element.offsetHeight;
+            
+            // Check if scroll position is within this section
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                activeSection = section.id;
+                break;
+            }
+            
+            // For the last section, activate it if we're close to the bottom
+            if (i === this.sections.length - 1 && scrollPosition >= sectionTop) {
+                activeSection = section.id;
+            }
+        }
+        
+        // If no section found (at top), activate first section
+        if (!activeSection && this.sections.length > 0) {
+            activeSection = this.sections[0].id;
+        }
+        
+        if (activeSection) {
+            this.setActiveSection(activeSection);
+        }
     }
     
     setActiveSection(sectionId) {
