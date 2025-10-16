@@ -26,5 +26,12 @@
     "luogo": "",
     "directory": "./assets/events/misc",
     "visible": 0
+  },
+  {
+    "nome": "Concerto chiesa delle Francescane",
+    "data": "2024-12-15",
+    "luogo": "Abbazia di San Nilo, Grottaferrata",
+    "directory": "./assets/events/abbazia-san-nilo",
+    "visible": 0
   }
 ]

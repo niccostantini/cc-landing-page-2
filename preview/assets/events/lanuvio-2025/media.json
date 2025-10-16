@@ -5,6 +5,8 @@
     { "src": "002.webp", "type": "image" },
     { "src": "003.webp", "type": "image" },
     { "src": "004.webp", "type": "image" },
-    { "src": "005.mp4", "type": "video" }
+    { "src": "005.mp4", "type": "video" },
+    { "src": "006.webp", "type": "image" },
+    { "src": "007.webp", "type": "image" }
   ]
 }

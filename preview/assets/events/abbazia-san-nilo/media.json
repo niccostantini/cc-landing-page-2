@@ -1,0 +1,8 @@
+{
+  "title": "Concerto Biblioteca Lanuvio",
+  "media": [
+    { "src": "001.mp4", "type": "video" },
+    { "src": "002.mp4", "type": "video" },
+    { "src": "003.mp4", "type": "video" }
+  ]
+}
