@@ -30,14 +30,11 @@
 
     // Normalize directory parameter
     if (baseDir) {
-        // Convert absolute paths starting with /assets/ to relative ./assets/
+        // Convert absolute paths starting with /assets/ to relative assets/
         if (baseDir.startsWith('/assets/')) {
-            baseDir = '.' + baseDir;
+            baseDir = baseDir.substring(1);
         }
-        // Add ./ prefix if missing for paths starting with assets/
-        else if (baseDir.startsWith('assets/')) {
-            baseDir = './' + baseDir;
-        }
+        // Paths starting with assets/ are already correct
         // Ensure trailing slash
         if (!baseDir.endsWith('/')) {
             baseDir += '/';
@@ -46,7 +43,7 @@
 
     // Security check: validate directory path
     console.log('[MOBILE DEBUG] Validating baseDir:', baseDir);
-    if (!baseDir.startsWith('./assets/events/')) {
+    if (!baseDir.startsWith('assets/events/')) {
         console.error('[MOBILE DEBUG] Invalid directory path:', baseDir);
         document.body.textContent = 'Percorso non valido.';
         return;
@@ -192,8 +189,8 @@
         const item = items[slideIndex];
         
         // Construct URL relative to gallery.html location
-        // Since baseDir is already normalized to relative form (./assets/events/...)
-        // and gallery.html is in /preview/, the paths will resolve correctly
+        // Since baseDir is already normalized to relative form (assets/events/...)
+        // the paths will resolve correctly
         const src = baseDir + item.src;
         
         let element;

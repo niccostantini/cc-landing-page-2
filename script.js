@@ -455,7 +455,7 @@ class WordCloudManager {
  */
 async function loadRepertorio() {
     try {
-        const response = await fetch('./assets/data/pezzi.json');
+        const response = await fetch('assets/data/pezzi.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -792,7 +792,7 @@ function showRepertorioFallback() {
  */
 async function loadDirettivo() {
     try {
-        const response = await fetch('./assets/data/direttivo.json');
+        const response = await fetch('assets/data/direttivo.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -828,7 +828,7 @@ function renderDirettivo(membri) {
  */
 function createMembroCard(membro) {
     const nomeCompleto = `${membro.nome} ${membro.cognome}`;
-    const imagePath = `./assets/images/direttivo/${membro['nome-file-immagine']}`;
+    const imagePath = `assets/images/direttivo/${membro['nome-file-immagine']}`;
     const initials = getInitials(membro.nome, membro.cognome);
     const hasSitoEsterno = membro['sito-esterno'] && membro['sito-esterno'].trim() !== '';
     
@@ -974,7 +974,7 @@ function isVisible(visibleValue) {
  */
 async function loadEventi() {
     try {
-        const response = await fetch('./assets/data/eventi.json');
+        const response = await fetch('assets/data/eventi.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -1372,7 +1372,7 @@ function initErrorHandling() {
  */
 async function loadGalleria() {
     try {
-        const response = await fetch('./assets/data/eventi.json');
+        const response = await fetch('assets/data/eventi.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -1391,7 +1391,7 @@ async function getFirstImageThumbnail(directory) {
     try {
         // Normalize directory path to relative format
         const normalizedDir = directory.startsWith('/') ? directory.substring(1) : directory;
-        const adjustedDir = normalizedDir.startsWith('assets/') ? './' + normalizedDir : directory;
+        const adjustedDir = normalizedDir.startsWith('assets/') ? normalizedDir : directory;
         
         const mediaPath = `${adjustedDir}/media.json`;
         const response = await fetch(mediaPath);
