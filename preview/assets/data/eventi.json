@@ -1,28 +1,40 @@
 [
   {
     "nome": "Concerto Biblioteca Lanuvio",
-    "data": "2025-09-25",
+    "data": "2025-05-25",
+    "precision": "day",
     "luogo": "Biblioteca di Lanuvio",
     "directory": "./assets/events/lanuvio-2025",
-    "visible": 0
+    "visible": 1
   },
   {
     "nome": "Lezione Concerto MLK",
     "data": "2025-05-04",
+    "precision": "day",
     "luogo": "Spin Time, Roma",
     "directory": "./assets/events/lezione-concerto-MLK",
-    "visible": 0
+    "visible": 1
   },
   {
-    "nome": "Presentazione: Il migrante espiatorio",
-    "data": "Novembre, data da determinare",
+    "nome": "Presentazione: 'Il migrato espiatorio'",
+    "data": "2025-11-01",
+    "precision": "month",
     "luogo": "Roma, luogo da determinare",
+    "directory": "",
+    "visible": 1
+  },
+  {
+    "nome": "Festival Estivo",
+    "data": "2025-01-01",
+    "precision": "year",
+    "luogo": "Da definire",
     "directory": "",
     "visible": 1
   },
   {
     "nome": "Varie",
     "data": "",
+    "precision": "day",
     "luogo": "",
     "directory": "./assets/events/misc",
     "visible": 0
@@ -30,6 +42,7 @@
   {
     "nome": "Concerto chiesa delle Francescane",
     "data": "2024-12-15",
+    "precision": "day",
     "luogo": "Abbazia di San Nilo, Grottaferrata",
     "directory": "./assets/events/abbazia-san-nilo",
     "visible": 0

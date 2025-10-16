@@ -23,20 +23,42 @@ function debounce(func, wait) {
 }
 
 /**
- * Format date to Italian locale
+ * Format date to Italian locale with precision support
  */
 function isValidDate(d) {
     return d instanceof Date && !isNaN(d);
 }
 
-function formatDate(dateString) {
+function formatDate(dateString, precision = 'day') {
+    if (!dateString || dateString === '' || dateString === '0') {
+        return 'Data da definire';
+    }
+    
     const date = new Date(dateString);
-    if (!isValidDate(date)) return dateString
-    return date.toLocaleDateString('it-IT', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    });
+    if (!isValidDate(date)) {
+        return dateString;
+    }
+    
+    switch (precision) {
+        case 'year':
+            return date.toLocaleDateString('it-IT', {
+                year: 'numeric'
+            }) + ', giorno e mese da determinare';
+            
+        case 'month':
+            return date.toLocaleDateString('it-IT', {
+                month: 'long',
+                year: 'numeric'
+            }) + ', giorno da determinare';
+            
+        case 'day':
+        default:
+            return date.toLocaleDateString('it-IT', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+    }
 }
 
 // ==========================================================================
@@ -734,7 +756,9 @@ function createEventoCard(evento) {
     const card = document.createElement('div');
     card.className = 'evento-card';
     
-    const formattedDate = formatDate(evento.data);
+    // Use precision if available, otherwise default to 'day' for backward compatibility
+    const precision = evento.precision || 'day';
+    const formattedDate = formatDate(evento.data, precision);
     
     card.innerHTML = `
         <h3 class="evento-card__nome">${escapeHtml(evento.nome)}</h3>
