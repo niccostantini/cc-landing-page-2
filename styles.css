@@ -34,7 +34,7 @@
     
     /* Typography */
     --font-display: 'League Spartan', system-ui, Arial, sans-serif;
-    --font-body: 'TT Norms', system-ui, Arial, sans-serif;
+    --font-body: 'Urbanist', system-ui, Arial, sans-serif;
     
     /* Container max-width */
     --container-width: 900px;
@@ -115,31 +115,28 @@
     font-weight: 900;
     src: url('assets/fonts/league-spartan-v15-latin/league-spartan-v15-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/*TT Norms regular*/
+/*Urbanist regular*/
 @font-face {
-    font-family: 'TT Norms';
+    font-family: 'Urbanist';
     font-display: swap;
     font-weight: 400;
-    src: url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff2') format('woff2'),
-    url('assets/fonts/TT-Norms-sv/TTNorms-Regular.woff') format('woff')
+    src: url('assets/fonts/urbanist/urbanist-v18-latin-regular.woff2') format('woff2');
 }
 
-/*TT Norms medium*/
+/*Urbanist semi-bold*/
 @font-face {
-    font-family: 'TT Norms';
+    font-family: 'Urbanist';
     font-display: swap;
     font-weight: 600;
-    src: url('assets/fonts/TT-Norms-sv/TTNorms-Medium.woff2') format('woff2'),
-    url('assets/fonts/TT-Norms-sv/TTNorms-Medium.woff') format('woff')
+    src: url('assets/fonts/urbanist/urbanist-v18-latin-600.woff2') format('woff2');
 }
 
-/*TT Norms bold*/
+/*Urbanist bold*/
 @font-face {
-    font-family: 'TT Norms';
+    font-family: 'Urbanist';
     font-display: swap;
     font-weight: 700;
-    src: url('assets/fonts/TT-Norms-sv/TTNorms-Bold.woff2') format('woff2'),
-    url('assets/fonts/TT-Norms-sv/TTNorms-Bold.woff') format('woff')
+    src: url('assets/fonts/urbanist/urbanist-v18-latin-700.woff2') format('woff2');
 }
 
 
