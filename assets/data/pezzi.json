@@ -228,5 +228,33 @@
     "Tag": [
       "Musica di resistenza"
     ]
+  },
+  {
+    "Titolo": "Amazing Grace",
+    "Autore": "from Carrell & Clayton's Virginia Harmony",
+    "Tag": [
+      "Spiritual"
+    ]
+  },
+  {
+    "Titolo": "God is a Wonder to My Soul",
+    "Autore": "Fryson & Wonder",
+    "Tag": [
+      "Spiritual"
+    ]
+  },
+  {
+    "Titolo": "Love Theme",
+    "Autore": "Morricone & Groban",
+    "Tag": [
+      "Colonna sonora"
+    ]
+  },
+  {
+    "Titolo": "Sweet Hour of Prayer",
+    "Autore": "Walford & Bradbury",
+    "Tag": [
+      "Spiritual"
+    ]
   }
 ]

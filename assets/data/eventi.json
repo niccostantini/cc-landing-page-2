@@ -16,7 +16,7 @@
     "visible": 1
   },
   {
-    "nome": "Presentazione: 'Immmigrato espiatorio'",
+    "nome": "Presentazione: 'Il migrante espiatorio'",
     "data": "2025-12-04",
     "precision": "day",
     "luogo": "Chiesa Metodista di Ponte Sant'Angelo, Roma",
@@ -38,5 +38,13 @@
     "luogo": "Chiesa delle Francescane, Grottaferrata",
     "directory": "assets/events/abbazia-san-nilo",
     "visible": 1
+  },
+  {
+    "nome": "\"Il migrante espiatorio\"",
+    "data": "2026-05-03",
+    "precision": "month",
+    "luogo": "Spin TIme, Roma",
+    "directory": "",
+    "visible": true
   }
 ]
