@@ -40,10 +40,10 @@
     "visible": 1
   },
   {
-    "nome": "\"Il migrante espiatorio\"",
-    "data": "2026-05-03",
-    "precision": "month",
-    "luogo": "Spin TIme, Roma",
+    "nome": "Il migrante espiatorio",
+    "data": "2026-05-04",
+    "precision": "day",
+    "luogo": "Spin Time, Roma",
     "directory": "",
     "visible": true
   }
